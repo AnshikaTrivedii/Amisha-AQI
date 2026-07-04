@@ -75,13 +75,13 @@ body {
 .stations-panel--top {
   top: 40.5%;
   height: 16.8%;
-  padding-top: 38px;
+  padding-top: clamp(10px, 7.17cqi, 38px);
 }
 
 .stations-panel--bottom {
   top: 65.4%;
   height: 17.8%;
-  padding-top: 40px;
+  padding-top: clamp(12px, 7.54cqi, 40px);
 }
 
 .stations-frame-header {
@@ -118,14 +118,14 @@ body {
 }
 
 .stations-frame-title {
-  font-size: 22px;
+  font-size: clamp(14px, 4.15cqi, 22px);
   font-weight: 600;
   color: #333;
   line-height: 1.2;
 }
 
 .stations-frame-hint {
-  font-size: 22px;
+  font-size: clamp(10px, 2.64cqi, 14px);
   color: #888;
   margin-top: 2px;
 }
@@ -361,10 +361,10 @@ body {
 
 .panel-title {
   text-align: center;
-  font-size: 22px;
+  font-size: clamp(14px, 4cqi, 24px);
   font-weight: 600;
   color: #333;
-  margin-bottom: 8px;
+  margin-bottom: clamp(4px, 1.33cqi, 8px);
   flex-shrink: 0;
   padding-top: 4px;
 }
@@ -398,7 +398,7 @@ body {
 }
 
 .aqi-card__label {
-  font-size: 22px;
+  font-size: clamp(12px, 3cqi, 18px);
   font-weight: 600;
   text-align: center;
   margin-bottom: 4px;
@@ -406,7 +406,7 @@ body {
 }
 
 .aqi-card__value {
-  font-size: 22px;
+  font-size: clamp(16px, 5.3cqi, 32px);
   font-weight: 700;
   line-height: 1;
 }
@@ -430,23 +430,23 @@ body {
 }
 
 .aqi-card__city {
-  font-size: 22px;
+  font-size: clamp(13px, 3.66cqi, 22px);
   font-weight: 700;
   color: #1a1a1a;
 }
 
 .aqi-card__updated {
-  font-size: 22px;
+  font-size: clamp(9px, 2cqi, 12px);
   color: #666;
   margin-bottom: 0;
 }
 
 .aqi-card__history {
   display: flex;
-  gap: 16px;
+  gap: clamp(8px, 2.66cqi, 16px);
   border-top: 1px solid #d8dde3;
-  padding-top: 8px;
-  margin-top: 8px;
+  padding-top: clamp(4px, 1.33cqi, 8px);
+  margin-top: clamp(4px, 1.33cqi, 8px);
 }
 
 .history-item {
@@ -457,19 +457,19 @@ body {
 }
 
 .history-item__date {
-  font-size: 22px;
+  font-size: clamp(8px, 1.83cqi, 11px);
   color: #444;
   font-weight: 500;
 }
 
 .history-item__dot {
-  width: 40px;
-  height: 40px;
+  width: clamp(24px, 6cqi, 36px);
+  height: clamp(24px, 6cqi, 36px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: clamp(11px, 2.33cqi, 14px);
   font-weight: 700;
 }
 
@@ -497,22 +497,22 @@ body {
 }
 
 .health-card__title {
-  font-size: 22px;
+  font-size: clamp(12px, 2.66cqi, 16px);
   font-weight: 700;
   color: #222;
   margin-bottom: 4px;
 }
 
 .health-card__text {
-  font-size: 22px;
+  font-size: clamp(10px, 2.16cqi, 13px);
   color: #333;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .aqi-calendar-note {
-  margin-top: 8px;
+  margin-top: clamp(4px, 1.33cqi, 8px);
   text-align: center;
-  font-size: 22px;
+  font-size: clamp(9px, 2cqi, 12px);
   font-weight: 600;
   color: #2a2a2a;
   flex-shrink: 0;
@@ -525,7 +525,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: clamp(6px, 2.83cqi, 15px);
 }
 
 .stations-list__item {
@@ -562,7 +562,7 @@ body {
 }
 
 .station-name {
-  font-size: 22px;
+  font-size: clamp(11px, 2.83cqi, 15px);
   color: #333;
   flex: 1;
   line-height: 1.3;
@@ -591,19 +591,19 @@ body {
 
 .stations-slot .aqi-badge--sm,
 .stations-panel .aqi-badge--sm {
-  width: 40px;
-  height: 40px;
+  width: clamp(28px, 7.54cqi, 40px);
+  height: clamp(28px, 7.54cqi, 40px);
   flex-shrink: 0;
 }
 
 .stations-slot .aqi-badge--sm .aqi-badge__label,
 .stations-panel .aqi-badge--sm .aqi-badge__label {
-  font-size: 22px;
+  font-size: clamp(8px, 1.88cqi, 10px);
 }
 
 .stations-slot .aqi-badge--sm .aqi-badge__value,
 .stations-panel .aqi-badge--sm .aqi-badge__value {
-  font-size: 22px;
+  font-size: clamp(11px, 2.83cqi, 15px);
 }
 
 /* AQI badges */
@@ -631,17 +631,17 @@ body {
 }
 
 .aqi-badge__label {
-  font-size: 22px;
+  font-size: clamp(8px, 2cqi, 11px);
   font-weight: 500;
 }
 
 .aqi-badge__value {
-  font-size: 22px;
+  font-size: clamp(11px, 3cqi, 16px);
   line-height: 1;
 }
 
 .aqi-badge--sm .aqi-badge__value {
-  font-size: 22px;
+  font-size: clamp(10px, 2.5cqi, 14px);
 }
 
 @media (min-width: 431px) {
@@ -656,7 +656,7 @@ body {
   justify-content: center;
   min-height: 100%;
   padding: 24px;
-  font-size: 22px;
+  font-size: clamp(14px, 3.5cqi, 18px);
   color: #666;
 }
 
