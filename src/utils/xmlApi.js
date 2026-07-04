@@ -100,6 +100,19 @@ function buildCityData(cityName, stations) {
   }
 }
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = 5000) {
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    return await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    })
+  } finally {
+    clearTimeout(id)
+  }
+}
+
 async function fetchXmlText(forceRefresh = false) {
   const cacheValid = cachedXmlText && Date.now() - cacheTimestamp < CACHE_TTL_MS
   if (!forceRefresh && cacheValid) {
@@ -111,7 +124,8 @@ async function fetchXmlText(forceRefresh = false) {
 
   for (const url of sources) {
     try {
-      const response = await fetch(url)
+      const isApi = url === AQI_API_URL
+      const response = await fetchWithTimeout(url, {}, isApi ? 5000 : 3000)
       if (!response.ok) {
         lastError = new Error(`Failed to load AQI data (${response.status})`)
         continue
@@ -147,7 +161,7 @@ async function fetchSupplementXml() {
   }
 
   try {
-    const response = await fetch(SUPPLEMENT_URL)
+    const response = await fetchWithTimeout(SUPPLEMENT_URL, {}, 3000)
     if (response.ok) {
       cachedSupplementXml = await response.text()
     }
