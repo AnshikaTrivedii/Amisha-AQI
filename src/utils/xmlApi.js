@@ -1,7 +1,7 @@
 const DEFAULT_CITY = 'Lucknow'
 const AQI_API_URL = '/api/aqi'
 const SUPPLEMENT_URL = '/city_aqi.xml'
-const CACHE_TTL_MS = 30 * 60 * 1000
+const CACHE_TTL_MS = 20 * 60 * 1000
 
 let cachedXmlText = null
 let cacheTimestamp = 0

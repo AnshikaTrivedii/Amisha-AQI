@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { DEFAULT_CITY, fetchAqiData, getAllCities } from '../utils/xmlApi'
 import { getAqiHistory, recordAqiReading, toReadingIsoDate } from '../utils/aqiHistory'
 
-const REFRESH_INTERVAL_MS = 30 * 60 * 1000
+const REFRESH_INTERVAL_MS = 20 * 60 * 1000
 
 const AqiContext = createContext(null)
 
