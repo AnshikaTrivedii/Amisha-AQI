@@ -14,6 +14,7 @@ function fetchCpcbFeed() {
           'Accept-Language': 'en-US,en;q=0.9',
         },
         timeout: 25000,
+        rejectUnauthorized: false,
       },
       (response) => {
         if (response.statusCode && response.statusCode >= 400) {
