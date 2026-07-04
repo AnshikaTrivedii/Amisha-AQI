@@ -91,6 +91,7 @@ function buildCityData(cityName, stations) {
     name: cityName,
     aqi: avgAqi,
     lastUpdated: formatLastUpdated(latestUpdate),
+    lastUpdatedRaw: latestUpdate,
     lat,
     lng,
     history: [],

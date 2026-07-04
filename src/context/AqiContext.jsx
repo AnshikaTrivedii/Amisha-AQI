@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { DEFAULT_CITY, fetchAqiData, getAllCities } from '../utils/xmlApi'
-import { getAqiHistory, recordAqiReading } from '../utils/aqiHistory'
+import { getAqiHistory, recordAqiReading, toReadingIsoDate } from '../utils/aqiHistory'
 
 const REFRESH_INTERVAL_MS = 30 * 60 * 1000
 
@@ -18,7 +18,8 @@ export function AqiProvider({ children }) {
 
     try {
       const result = await fetchAqiData(cityName, forceRefresh)
-      recordAqiReading(result.cityData.name, result.cityData.aqi)
+      const readingDate = toReadingIsoDate(result.cityData.lastUpdatedRaw)
+      recordAqiReading(result.cityData.name, result.cityData.aqi, readingDate)
       result.cityData.history = getAqiHistory(result.cityData.name)
       setData(result)
       setError(null)
