@@ -105,14 +105,25 @@ async function fetchXmlText(forceRefresh = false) {
     return cachedXmlText
   }
 
-  const response = await fetch(AQI_API_URL)
-  if (!response.ok) {
-    throw new Error('Failed to load AQI data from CPCB')
+  const sources = [AQI_API_URL, SUPPLEMENT_URL]
+  let lastError = null
+
+  for (const url of sources) {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        lastError = new Error(`Failed to load AQI data (${response.status})`)
+        continue
+      }
+      cachedXmlText = await response.text()
+      cacheTimestamp = Date.now()
+      return cachedXmlText
+    } catch (err) {
+      lastError = err
+    }
   }
 
-  cachedXmlText = await response.text()
-  cacheTimestamp = Date.now()
-  return cachedXmlText
+  throw lastError || new Error('Failed to load AQI data from CPCB')
 }
 
 export function parseAqiXml(xmlText, cityName = DEFAULT_CITY) {
