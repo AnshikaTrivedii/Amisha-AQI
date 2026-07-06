@@ -241,21 +241,21 @@ export default function StationsPage() {
 
           <div className="stations-signage-page__stage">
             <div className="stations-signage-page__boards">
-              <header className="stations-board__header stations-board__header--plain">
-                <div className="stations-board__heading">
-                  <PinIcon />
-                  <div>
-                    <h2>Active Stations : {activeCount} / {totalCount}</h2>
-                    <p>(Tap on a station to see more info)</p>
+              <section className="stations-board stations-board--top">
+                <header className="stations-board__header stations-board__header--plain">
+                  <div className="stations-board__heading">
+                    <PinIcon />
+                    <div>
+                      <h2>Active Stations : {activeCount} / {totalCount}</h2>
+                      <p>(Tap on a station to see more info)</p>
+                    </div>
                   </div>
-                </div>
-              </header>
+                </header>
 
-              <section className="stations-row-section">
                 <StationRow stations={firstRow} startIndex={0} />
               </section>
 
-              <section className="stations-row-section">
+              <section className="stations-board stations-board--bottom">
                 <StationRow stations={secondRow} startIndex={3} />
               </section>
 
@@ -270,7 +270,16 @@ export default function StationsPage() {
             </div>
 
             <div className="stations-signage-page__mascot-wrap" aria-hidden="true">
-              <img src="/chicken.svg" alt="" className="stations-signage-page__mascot" />
+              <img
+                src="/chicken@2x.png"
+                srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
+                sizes="440px"
+                width="1500"
+                height="1500"
+                alt=""
+                className="stations-signage-page__mascot"
+                decoding="async"
+              />
             </div>
           </div>
         </section>
