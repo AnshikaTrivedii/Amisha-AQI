@@ -148,7 +148,14 @@ export default function CityAqiPage() {
               </article>
 
               <div className="aqi-hero-page__mascot-wrap" aria-hidden="true">
-                <img src="/chicken.svg" alt="" className="aqi-hero-page__mascot" />
+                <img
+                  src="/chicken@2x.png"
+                  srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
+                  sizes="(max-width: 920px) 42vw, 37vw"
+                  alt=""
+                  className="aqi-hero-page__mascot"
+                  decoding="async"
+                />
               </div>
             </div>
           </div>
