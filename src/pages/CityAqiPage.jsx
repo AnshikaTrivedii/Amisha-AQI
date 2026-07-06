@@ -1,36 +1,55 @@
-import { Link } from 'react-router-dom'
+import AqiGauge from '../components/AqiGauge'
 import { getAqiCategory, getHealthImpact } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
 
-function HistoryDot({ date, aqi }) {
-  const cat = getAqiCategory(aqi)
-  const textColor = cat.textColor || '#fff'
-
+function WindIcon() {
   return (
-    <div className="history-item">
-      <span className="history-item__date">{date}</span>
-      <div
-        className="history-item__dot"
-        style={{ backgroundColor: cat.bg, color: textColor }}
-      >
-        {aqi}
-      </div>
-    </div>
+    <svg className="status-panel__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.95)" />
+      <g stroke="#68b43e" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 24h16c4.4 0 8-3.6 8-8" />
+        <path d="M16 31h24c5 0 9 4 9 9" />
+        <path d="M20 38h12c4.4 0 8 3.6 8 8" />
+        <path d="M42 16a4 4 0 1 1 0 8" />
+        <path d="M49 36a4 4 0 1 1 0 8" />
+        <path d="M40 42a4 4 0 1 1 0 8" />
+      </g>
+    </svg>
   )
 }
 
-function HealthIllustration({ shirtColor }) {
+function CalendarIcon() {
   return (
-    <svg className="health-illustration" viewBox="0 0 80 100" fill="none">
-      <ellipse cx="40" cy="92" rx="22" ry="5" fill="#e0e0e0" />
-      <rect x="28" y="58" width="24" height="32" rx="4" fill={shirtColor} />
-      <rect x="22" y="62" width="10" height="22" rx="3" fill={shirtColor} />
-      <rect x="48" y="62" width="10" height="22" rx="3" fill={shirtColor} />
-      <circle cx="40" cy="32" r="18" fill="#fdd8b5" />
-      <path d="M22 28c2-10 12-16 18-16s16 6 18 16" fill="#333" />
-      <circle cx="33" cy="32" r="2" fill="#333" />
-      <circle cx="47" cy="32" r="2" fill="#333" />
-      <path d="M36 40c2 2 6 2 8 0" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className="aqi-meta__calendar" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7 2v3M17 2v3M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function LocationIcon() {
+  return (
+    <svg className="aqi-location__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 21s-6.5-5.9-6.5-11A6.5 6.5 0 1 1 18.5 10c0 5.1-6.5 11-6.5 11Z"
+        fill="#2f9b35"
+      />
+      <circle cx="12" cy="10" r="2.4" fill="#fff" />
+    </svg>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg className="aqi-message__check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="12" fill="#37a63b" />
+      <path d="m7.5 12.5 3 3 6-7" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -39,7 +58,7 @@ export default function CityAqiPage() {
   const { cityData, loading, error } = useAqi()
 
   if (loading) {
-    return <div className="page-status">Loading AQI data…</div>
+    return <div className="page-status">Loading AQI data...</div>
   }
 
   if (error || !cityData) {
@@ -48,57 +67,93 @@ export default function CityAqiPage() {
 
   const category = getAqiCategory(cityData.aqi)
   const healthText = getHealthImpact(cityData.aqi)
-  const statusTextColor = category.textColor || '#fff'
 
   return (
-    <div className="city-aqi-page">
-      <Link to="/stations" className="back-btn" aria-label="Back to stations">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2.5">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </Link>
-
-      <div className="bottom-panel">
-        <div className="bottom-panel__body">
-          <h1 className="panel-title">City Level AQI Data</h1>
-
-        <div className="aqi-card">
-          <div
-            className="aqi-card__status"
-            style={{ backgroundColor: category.bg, color: statusTextColor }}
-          >
-            <span className="aqi-card__label">{category.label}</span>
-            <span className="aqi-card__value">{cityData.aqi}</span>
-          </div>
-          <div className="aqi-card__details">
-            <div className="aqi-card__location">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#1976d2">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
-              </svg>
-              <span className="aqi-card__city">{cityData.name}</span>
+    <main className="aqi-hero-page">
+      <div className="aqi-hero-page__backdrop" />
+      <div className="aqi-hero-page__content">
+        <header className="aqi-hero-page__header">
+          <div className="aqi-banner">
+            <img
+              src="/logo.png"
+              alt="Uttar Pradesh Pollution Control Board logo"
+              className="aqi-banner__logo"
+            />
+            <div className="aqi-banner__text">
+              <p className="aqi-banner__title-hi">उत्तर प्रदेश प्रदूषण नियंत्रण बोर्ड</p>
+              <p className="aqi-banner__title-en">UTTAR PRADESH POLLUTION CONTROL BOARD</p>
             </div>
-            <p className="aqi-card__updated">Last updated: {cityData.lastUpdated}</p>
-            {cityData.history.length > 0 && (
-              <div className="aqi-card__history">
-                {cityData.history.map((item) => (
-                  <HistoryDot key={item.date} date={item.date} aqi={item.aqi} />
-                ))}
+          </div>
+        </header>
+
+        <section className="aqi-hero-page__hero" aria-label="AQI dashboard">
+          <h1 className="aqi-hero-page__title">AQI</h1>
+
+          <div className="aqi-hero-page__main">
+            <div className="aqi-stage">
+              <article className="aqi-dashboard-card">
+                <section
+                  className="aqi-dashboard-card__status-panel"
+                  style={{ '--status-color': category.bg }}
+                >
+                  <WindIcon />
+                  <p className="status-panel__heading">
+                    AIR QUALITY
+                    <span>{category.label.toUpperCase()}</span>
+                  </p>
+                  <p className="status-panel__value">{cityData.aqi}</p>
+                  <p className="status-panel__scale">
+                    AQI (US)
+                    <span>0 - 500 Scale</span>
+                  </p>
+                </section>
+
+                <section className="aqi-dashboard-card__details">
+                  <div className="aqi-dashboard-card__summary">
+                    <div className="aqi-dashboard-card__info">
+                      <div className="aqi-location">
+                        <LocationIcon />
+                        <h2>{cityData.name}</h2>
+                      </div>
+
+                      <div className="aqi-meta">
+                        <CalendarIcon />
+                        <div>
+                          <span>Last updated:</span>
+                          <strong>{cityData.lastUpdated || 'Unavailable'}</strong>
+                        </div>
+                      </div>
+
+                      <div className="aqi-status-block">
+                        <p className="aqi-status-block__label">AQI Status</p>
+                        <span
+                          className="aqi-status-block__pill"
+                          style={{ '--status-color': category.bg }}
+                        >
+                          {category.label.toUpperCase()}
+                        </span>
+                      </div>
+
+                      <div className="aqi-message">
+                        <p>{healthText}</p>
+                        <CheckIcon />
+                      </div>
+                    </div>
+
+                    <div className="aqi-dashboard-card__gauge">
+                      <AqiGauge aqi={cityData.aqi} />
+                    </div>
+                  </div>
+                </section>
+              </article>
+
+              <div className="aqi-hero-page__mascot-wrap" aria-hidden="true">
+                <img src="/chicken.svg" alt="" className="aqi-hero-page__mascot" />
               </div>
-            )}
+            </div>
           </div>
-        </div>
-
-        <div className="health-card">
-          <HealthIllustration shirtColor={category.bg} />
-          <div className="health-card__content">
-            <h2 className="health-card__title">Health Impact</h2>
-            <p className="health-card__text">{healthText}</p>
-          </div>
-        </div>
-
-        <p className="aqi-calendar-note">AQI Calendar (Updated at 4:00 PM daily)</p>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

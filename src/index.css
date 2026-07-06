@@ -9,21 +9,18 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 #root {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
 }
 
 body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #dfe6ee;
-  color: #333;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  background: #eef3fb;
+  color: #20243d;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -516,6 +513,519 @@ body {
   font-weight: 600;
   color: #2a2a2a;
   flex-shrink: 0;
+}
+
+/* Full-page AQI hero */
+
+.aqi-hero-page {
+  position: relative;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 240, 213, 0.34)),
+    url('/background.png') center bottom / cover no-repeat;
+}
+
+.aqi-hero-page__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 73% 58%, rgba(255, 244, 200, 0.54), transparent 25%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 238, 209, 0.2));
+  pointer-events: none;
+}
+
+.aqi-hero-page__content {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  min-height: 100vh;
+  padding: clamp(10px, 1.3vw, 18px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.aqi-hero-page__header {
+  display: flex;
+  justify-content: center;
+  width: calc(100% + (clamp(10px, 1.3vw, 18px) * 2));
+  margin-left: calc(clamp(10px, 1.3vw, 18px) * -1);
+  margin-right: calc(clamp(10px, 1.3vw, 18px) * -1);
+  margin-top: calc(clamp(10px, 1.3vw, 18px) * -1);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 10px rgba(49, 65, 125, 0.08);
+}
+
+.aqi-banner {
+  position: relative;
+  width: 100%;
+  min-height: clamp(78px, 12vh, 124px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 1vw, 14px) clamp(18px, 2vw, 38px);
+}
+
+.aqi-banner__logo {
+  position: absolute;
+  left: clamp(18px, 2vw, 38px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(64px, 8vw, 110px);
+  height: auto;
+  display: block;
+}
+
+.aqi-banner__text {
+  width: 100%;
+  min-width: 0;
+  color: #2b318d;
+  text-align: center;
+  padding-inline: clamp(88px, 12vw, 150px);
+}
+
+.aqi-banner__title-hi {
+  font-size: clamp(1.55rem, 3.4vw, 3.35rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.aqi-banner__title-en {
+  margin-top: clamp(4px, 0.6vw, 8px);
+  font-size: clamp(1rem, 2vw, 2rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.aqi-hero-page__banner {
+  width: 100%;
+  height: auto;
+  max-height: 18vh;
+  display: block;
+  object-fit: cover;
+}
+
+.aqi-hero-page__hero {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 18px);
+  padding-top: clamp(4px, 0.6vw, 8px);
+  overflow: hidden;
+}
+
+.aqi-hero-page__title {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.92;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #0d49b5;
+  text-shadow:
+    0 3px 0 rgba(255, 255, 255, 0.9),
+    0 6px 14px rgba(35, 56, 110, 0.26);
+  flex-shrink: 0;
+}
+
+.aqi-hero-page__main {
+  width: min(1220px, 100%);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aqi-stage {
+  position: relative;
+  width: min(1220px, 100%);
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: clamp(180px, 20vw, 320px);
+}
+
+.aqi-dashboard-card {
+  flex: 1;
+  max-width: 920px;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(220px, 255px) minmax(0, 1fr);
+  gap: clamp(14px, 1.4vw, 22px);
+  padding: clamp(16px, 1.6vw, 22px);
+  border: 3px solid rgba(167, 174, 185, 0.65);
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(252, 252, 252, 0.95));
+  box-shadow:
+    0 10px 0 rgba(112, 122, 138, 0.28),
+    0 16px 44px rgba(75, 85, 110, 0.18);
+  overflow: hidden;
+}
+
+.aqi-dashboard-card__status-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--status-color) 84%, white) 0%, var(--status-color) 100%);
+  color: #fff;
+  padding: clamp(16px, 1.7vw, 22px) clamp(14px, 1.5vw, 18px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.aqi-dashboard-card__status-panel::before,
+.aqi-dashboard-card__status-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  width: 54px;
+  height: 70px;
+  opacity: 0.16;
+  background: url('/leaf.svg') center / contain no-repeat;
+}
+
+.aqi-dashboard-card__status-panel::before {
+  left: 10px;
+}
+
+.aqi-dashboard-card__status-panel::after {
+  right: 10px;
+  transform: scaleX(-1);
+}
+
+.status-panel__icon {
+  width: clamp(58px, 6vw, 82px);
+  height: auto;
+}
+
+.status-panel__heading {
+  font-size: clamp(1.05rem, 1.4vw, 1.5rem);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.status-panel__heading span,
+.status-panel__scale span {
+  display: block;
+}
+
+.status-panel__value {
+  font-size: clamp(4rem, 7vw, 5.8rem);
+  line-height: 0.9;
+  font-weight: 900;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.status-panel__scale {
+  font-size: clamp(1rem, 1.15vw, 1.28rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.status-panel__scale span {
+  margin-top: 6px;
+  font-size: clamp(0.92rem, 0.95vw, 1.05rem);
+  font-weight: 500;
+}
+
+.aqi-dashboard-card__details {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.aqi-dashboard-card__summary {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: clamp(14px, 1.4vw, 24px);
+  align-items: center;
+}
+
+.aqi-dashboard-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.aqi-location {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.aqi-location h2 {
+  font-size: clamp(1.7rem, 2vw, 2.5rem);
+  line-height: 1;
+  font-weight: 800;
+  color: #17215e;
+}
+
+.aqi-location__icon {
+  width: clamp(28px, 2.8vw, 40px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+.aqi-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #ece8df;
+  color: #2c2e5c;
+}
+
+.aqi-meta__calendar {
+  width: 28px;
+  height: 28px;
+  color: #6aa63b;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.aqi-meta span {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.aqi-meta strong {
+  display: block;
+  margin-top: 2px;
+  font-size: clamp(0.96rem, 1.05vw, 1.08rem);
+  font-weight: 500;
+}
+
+.aqi-status-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.aqi-status-block__label {
+  font-size: clamp(1rem, 1.15vw, 1.2rem);
+  font-weight: 800;
+  color: #17215e;
+}
+
+.aqi-status-block__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 178px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--status-color) 88%, white) 0%, var(--status-color) 100%);
+  color: #fff;
+  font-size: clamp(1rem, 1.1vw, 1.18rem);
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.aqi-message {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1.5px solid #e3e0bf;
+  background: linear-gradient(180deg, rgba(242, 244, 225, 0.95), rgba(235, 239, 215, 0.92));
+  color: #1f2758;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.aqi-message p {
+  font-size: clamp(0.96rem, 1vw, 1.08rem);
+  line-height: 1.4;
+}
+
+.aqi-message__check {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.aqi-dashboard-card__gauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aqi-gauge {
+  width: 100%;
+  max-width: 320px;
+  overflow: visible;
+}
+
+.aqi-gauge__tick {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #25306e;
+}
+
+.aqi-gauge__label-main {
+  font-size: 18px;
+  font-weight: 800;
+  fill: #17215e;
+}
+
+.aqi-gauge__label-sub {
+  font-size: 15px;
+  font-weight: 500;
+  fill: #17215e;
+}
+
+.aqi-hero-page__mascot-wrap {
+  position: absolute;
+  right: 0;
+  bottom: max(-1vh, -6px);
+  width: clamp(280px, 30vw, 430px);
+  height: clamp(360px, 78%, 620px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.aqi-hero-page__mascot {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .aqi-stage {
+    padding-right: clamp(150px, 22vw, 240px);
+  }
+
+  .aqi-hero-page__mascot-wrap {
+    width: clamp(220px, 34vw, 300px);
+    height: clamp(300px, 62%, 440px);
+  }
+}
+
+@media (max-width: 760px) {
+  .aqi-stage {
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .aqi-dashboard-card {
+    grid-template-columns: 1fr;
+  }
+
+  .aqi-dashboard-card__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .aqi-dashboard-card__status-panel {
+    min-height: 320px;
+    gap: 18px;
+  }
+
+  .aqi-hero-page__mascot-wrap {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .aqi-hero-page__content {
+    padding: 8px 8px 12px;
+  }
+
+  .aqi-hero-page__header {
+    width: calc(100% + 16px);
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -8px;
+  }
+
+  .aqi-banner {
+    min-height: 64px;
+    padding: 8px 10px;
+  }
+
+  .aqi-banner__logo {
+    left: 10px;
+    transform: translateY(-50%);
+    width: clamp(46px, 12vw, 62px);
+  }
+
+  .aqi-banner__text {
+    padding-inline: clamp(56px, 16vw, 88px);
+  }
+
+  .aqi-banner__title-hi {
+    font-size: clamp(0.95rem, 4.8vw, 1.35rem);
+  }
+
+  .aqi-banner__title-en {
+    font-size: clamp(0.68rem, 3vw, 0.95rem);
+    margin-top: 3px;
+  }
+
+  .aqi-hero-page__hero {
+    gap: 10px;
+  }
+
+  .aqi-hero-page__title {
+    font-size: clamp(2.4rem, 12vw, 4rem);
+  }
+
+  .aqi-dashboard-card {
+    padding: 12px;
+    border-radius: 24px;
+    gap: 12px;
+  }
+
+  .aqi-dashboard-card__status-panel {
+    border-radius: 24px;
+    min-height: 240px;
+  }
+
+  .aqi-location h2 {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+  }
+
+  .aqi-status-block__pill {
+    min-width: 100%;
+  }
+
+  .aqi-message {
+    align-items: center;
+  }
+
+  .aqi-message p {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .aqi-dashboard-card__gauge {
+    padding-top: 0;
+  }
+
+  .aqi-hero-page__mascot-wrap {
+    display: none;
+  }
 }
 
 /* ── Stations Page ── */
