@@ -1047,39 +1047,6 @@ body {
   flex: 1;
 }
 
-.stations-datetime {
-  flex-shrink: 0;
-  align-self: center;
-  margin-right: clamp(14px, 1.7vw, 26px);
-  padding: clamp(8px, 0.8vw, 12px) clamp(14px, 1.2vw, 18px);
-  border: 2px solid rgba(45, 49, 141, 0.18);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 4px 14px rgba(66, 79, 122, 0.08);
-  color: #1f2578;
-  min-width: clamp(160px, 16vw, 205px);
-}
-
-.stations-datetime__row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: clamp(0.92rem, 1.2vw, 1.2rem);
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.stations-datetime__row + .stations-datetime__row {
-  margin-top: 8px;
-}
-
-.stations-datetime__icon {
-  width: 24px;
-  height: 24px;
-  color: #1f2578;
-  flex-shrink: 0;
-}
-
 .stations-signage-page__hero {
   flex: 1;
   min-height: 0;
@@ -1352,10 +1319,10 @@ body {
 
 .stations-signage-page__mascot-wrap {
   position: absolute;
-  right: max(-15.5vw, -150px);
-  bottom: -62px;
-  width: clamp(340px, 32vw, 520px);
-  height: clamp(540px, 84vh, 780px);
+  right: max(-9vw, -90px);
+  bottom: 12px;
+  width: clamp(255px, 24vw, 400px);
+  height: clamp(405px, 66vh, 600px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1397,11 +1364,6 @@ body {
     flex-direction: column;
   }
 
-  .stations-datetime {
-    align-self: flex-end;
-    margin: 0 12px 10px 0;
-  }
-
   .stations-signage-page__stage {
     padding-right: 0;
   }
@@ -1426,16 +1388,6 @@ body {
     margin-left: -8px;
     margin-right: -8px;
     margin-top: -8px;
-  }
-
-  .stations-datetime {
-    min-width: 150px;
-    padding: 8px 12px;
-    border-radius: 16px;
-  }
-
-  .stations-datetime__row {
-    font-size: 0.95rem;
   }
 
   .stations-signage-page__title {

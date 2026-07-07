@@ -5,30 +5,6 @@ import { useAqi } from '../context/AqiContext'
 
 const PAGE_ROTATION_MS = 9000
 
-function CalendarIcon() {
-  return (
-    <svg className="stations-datetime__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M7 2v3M17 2v3M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function ClockIcon() {
-  return (
-    <svg className="stations-datetime__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.9" />
-      <path d="M12 7.5v5l3.5 2" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
 function PinIcon() {
   return (
     <svg className="stations-board__pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -89,22 +65,6 @@ function getStationAccent(aqi) {
     soft: '#ffe7d8',
     badge: '#ff5b00',
     skyline: '#f7dfd0',
-  }
-}
-
-function splitDateTime(lastUpdated) {
-  if (!lastUpdated) {
-    return { date: '--', time: '--' }
-  }
-
-  const parts = lastUpdated.split(' ')
-  if (parts.length < 4) {
-    return { date: lastUpdated, time: '--' }
-  }
-
-  return {
-    date: parts.slice(0, 3).join(' '),
-    time: parts.slice(3).join(' '),
   }
 }
 
@@ -227,7 +187,6 @@ export default function StationsPage() {
 
   const activeCount = stations.filter((station) => !station.offline).length
   const totalCount = stations.length
-  const { date, time } = splitDateTime(cityData?.lastUpdated)
 
   return (
     <main className="stations-signage-page">
@@ -243,17 +202,6 @@ export default function StationsPage() {
             <div className="aqi-banner__text">
               <p className="aqi-banner__title-hi">उत्तर प्रदेश प्रदूषण नियंत्रण बोर्ड</p>
               <p className="aqi-banner__title-en">UTTAR PRADESH POLLUTION CONTROL BOARD</p>
-            </div>
-          </div>
-
-          <div className="stations-datetime">
-            <div className="stations-datetime__row">
-              <CalendarIcon />
-              <span>{date}</span>
-            </div>
-            <div className="stations-datetime__row">
-              <ClockIcon />
-              <span>{time}</span>
             </div>
           </div>
         </header>
