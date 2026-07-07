@@ -142,14 +142,14 @@ export default function CityAqiPage() {
 
                       <div className="aqi-card__history">
                         {historyItems.map((item, index) => {
-                          const historyTheme = getAqiSummaryTheme(item.aqi)
+                          const historyTheme = getAqiSummaryTheme(Number(item.aqi))
 
                           return (
                             <div className="history-item" key={`${item.date}-${item.aqi}-${index}`}>
                               <span className="history-item__date">{item.date}</span>
                               <span
-                                className="history-item__dot"
-                                style={{ '--history-color': historyTheme.primary }}
+                                className="history-item__dot history-item__dot--scaled"
+                                style={{ background: historyTheme.gradient }}
                               >
                                 {item.aqi}
                               </span>
