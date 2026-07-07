@@ -1,22 +1,5 @@
-import AqiGauge from '../components/AqiGauge'
-import { getAqiCategory, getHealthImpact } from '../utils/aqi'
+import { getAqiCategory } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
-
-function WindIcon() {
-  return (
-    <svg className="status-panel__icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-      <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.95)" />
-      <g stroke="#68b43e" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 24h16c4.4 0 8-3.6 8-8" />
-        <path d="M16 31h24c5 0 9 4 9 9" />
-        <path d="M20 38h12c4.4 0 8 3.6 8 8" />
-        <path d="M42 16a4 4 0 1 1 0 8" />
-        <path d="M49 36a4 4 0 1 1 0 8" />
-        <path d="M40 42a4 4 0 1 1 0 8" />
-      </g>
-    </svg>
-  )
-}
 
 function CalendarIcon() {
   return (
@@ -45,13 +28,45 @@ function LocationIcon() {
   )
 }
 
-function CheckIcon() {
-  return (
-    <svg className="aqi-message__check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="12" fill="#37a63b" />
-      <path d="m7.5 12.5 3 3 6-7" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
+function formatUpdatedText(lastUpdated) {
+  if (!lastUpdated) {
+    return { primary: 'Unavailable', secondary: '' }
+  }
+
+  const parts = lastUpdated.trim().split(/\s+/)
+  if (parts.length >= 5) {
+    return {
+      primary: parts.slice(0, 4).join(' '),
+      secondary: parts[4],
+    }
+  }
+
+  if (parts.length === 4) {
+    return {
+      primary: parts.slice(0, 3).join(' '),
+      secondary: parts[3],
+    }
+  }
+
+  return { primary: lastUpdated, secondary: '' }
+}
+
+function buildHistory(history = [], currentAqi) {
+  const items = history.slice(-3)
+
+  if (items.length === 0) {
+    return [
+      { date: '--/--', aqi: currentAqi },
+      { date: '--/--', aqi: currentAqi },
+      { date: '--/--', aqi: currentAqi },
+    ]
+  }
+
+  while (items.length < 3) {
+    items.unshift(items[0])
+  }
+
+  return items
 }
 
 export default function CityAqiPage() {
@@ -66,7 +81,8 @@ export default function CityAqiPage() {
   }
 
   const category = getAqiCategory(cityData.aqi)
-  const healthText = getHealthImpact(cityData.aqi)
+  const updatedText = formatUpdatedText(cityData.lastUpdated)
+  const historyItems = buildHistory(cityData.history, cityData.aqi)
 
   return (
     <main className="aqi-hero-page">
@@ -92,20 +108,9 @@ export default function CityAqiPage() {
           <div className="aqi-hero-page__main">
             <div className="aqi-stage">
               <article className="aqi-dashboard-card">
-                <section
-                  className="aqi-dashboard-card__status-panel"
-                  style={{ '--status-color': category.bg }}
-                >
-                  <WindIcon />
-                  <p className="status-panel__heading">
-                    AIR QUALITY
-                    <span>{category.label.toUpperCase()}</span>
-                  </p>
+                <section className="aqi-dashboard-card__status-panel" style={{ '--status-color': category.bg }}>
+                  <p className="status-panel__heading">{category.label}</p>
                   <p className="status-panel__value">{cityData.aqi}</p>
-                  <p className="status-panel__scale">
-                    AQI (US)
-                    <span>0 - 500 Scale</span>
-                  </p>
                 </section>
 
                 <section className="aqi-dashboard-card__details">
@@ -118,30 +123,22 @@ export default function CityAqiPage() {
 
                       <div className="aqi-meta">
                         <CalendarIcon />
-                        <div>
-                          <span>Last updated:</span>
-                          <strong>{cityData.lastUpdated || 'Unavailable'}</strong>
+                        <div className="aqi-meta__text">
+                          <span>Last updated: {updatedText.primary}</span>
+                          {updatedText.secondary && <strong>{updatedText.secondary}</strong>}
                         </div>
                       </div>
 
-                      <div className="aqi-status-block">
-                        <p className="aqi-status-block__label">AQI Status</p>
-                        <span
-                          className="aqi-status-block__pill"
-                          style={{ '--status-color': category.bg }}
-                        >
-                          {category.label.toUpperCase()}
-                        </span>
+                      <div className="aqi-card__history">
+                        {historyItems.map((item, index) => (
+                          <div className="history-item" key={`${item.date}-${item.aqi}-${index}`}>
+                            <span className="history-item__date">{item.date}</span>
+                            <span className="history-item__dot" style={{ '--history-color': category.bg }}>
+                              {item.aqi}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-
-                      <div className="aqi-message">
-                        <p>{healthText}</p>
-                        <CheckIcon />
-                      </div>
-                    </div>
-
-                    <div className="aqi-dashboard-card__gauge">
-                      <AqiGauge aqi={cityData.aqi} />
                     </div>
                   </div>
                 </section>

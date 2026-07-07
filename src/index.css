@@ -670,132 +670,95 @@ body {
 
 .aqi-dashboard-card {
   flex: 0 1 auto;
-  width: min(620px, 82%);
+  width: min(620px, 88%);
   max-width: 620px;
   max-height: none;
   height: auto;
   display: grid;
-  grid-template-columns: minmax(148px, 174px) minmax(0, 1fr);
-  gap: clamp(8px, 0.9vw, 14px);
-  padding: clamp(9px, 1vw, 14px);
-  border: 3px solid rgba(167, 174, 185, 0.65);
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(252, 252, 252, 0.95));
+  grid-template-columns: minmax(138px, 178px) minmax(0, 1fr);
+  gap: clamp(14px, 1.4vw, 22px);
+  padding: clamp(16px, 1.45vw, 22px) clamp(18px, 1.6vw, 24px);
+  border: 2.5px solid #8dbceb;
+  border-radius: 18px;
+  background: #f8fbff;
   box-shadow:
-    0 8px 0 rgba(112, 122, 138, 0.28),
-    0 14px 36px rgba(75, 85, 110, 0.18);
-  overflow: visible;
+    0 8px 0 rgba(112, 122, 138, 0.16),
+    0 14px 36px rgba(75, 85, 110, 0.1);
+  overflow: hidden;
+  transform: translateX(-52px);
 }
 
 .aqi-dashboard-card__status-panel {
   position: relative;
-  overflow: visible;
-  border-radius: 22px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--status-color) 84%, white) 0%, var(--status-color) 100%);
-  color: #fff;
-  padding: clamp(9px, 1.1vw, 14px) clamp(8px, 0.95vw, 12px);
+  overflow: hidden;
+  border-radius: 16px;
+  background: #97d84d;
+  color: #111;
+  padding: clamp(14px, 1.35vw, 20px) clamp(10px, 0.95vw, 13px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-between;
-  min-height: 0;
-  height: auto;
+  justify-content: flex-start;
+  gap: clamp(18px, 2vh, 28px);
+  min-height: clamp(170px, 20vh, 260px);
   align-self: stretch;
 }
 
-.aqi-dashboard-card__status-panel::before,
-.aqi-dashboard-card__status-panel::after {
-  content: '';
-  position: absolute;
-  bottom: 10px;
-  width: 54px;
-  height: 70px;
-  opacity: 0.16;
-  background: url('/leaf.svg') center / contain no-repeat;
-}
-
-.aqi-dashboard-card__status-panel::before {
-  left: 10px;
-}
-
-.aqi-dashboard-card__status-panel::after {
-  right: 10px;
-  transform: scaleX(-1);
-}
-
-.status-panel__icon {
-  width: clamp(40px, 4.2vw, 56px);
-  height: auto;
-}
-
 .status-panel__heading {
-  font-size: clamp(0.8rem, 0.95vw, 1.08rem);
-  line-height: 1.15;
-  font-weight: 800;
-}
-
-.status-panel__heading span,
-.status-panel__scale span {
-  display: block;
+  font-size: clamp(1.25rem, 1.8vw, 2rem);
+  line-height: 1.05;
+  font-weight: 500;
+  color: #101010;
 }
 
 .status-panel__value {
-  font-size: clamp(2.65rem, 4.6vw, 3.9rem);
+  font-size: clamp(2.9rem, 4.5vw, 4.4rem);
   line-height: 0.9;
-  font-weight: 900;
-  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-}
-
-.status-panel__scale {
-  font-size: clamp(0.88rem, 1vw, 1.12rem);
-  line-height: 1.2;
-  font-weight: 700;
-}
-
-.status-panel__scale span {
-  margin-top: 4px;
-  font-size: clamp(0.82rem, 0.85vw, 0.95rem);
   font-weight: 500;
+  color: #101010;
 }
 
 .aqi-dashboard-card__details {
   display: flex;
   align-items: center;
   min-width: 0;
+  min-height: 0;
 }
 
 .aqi-dashboard-card__summary {
   width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(185px, 240px);
-  gap: clamp(8px, 0.9vw, 14px);
-  align-items: center;
+  display: flex;
+  align-items: stretch;
 }
 
 .aqi-dashboard-card__info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(10px, 1.1vh, 14px);
   min-width: 0;
+  width: 100%;
 }
 
 .aqi-location {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 100%;
 }
 
 .aqi-location h2 {
-  font-size: clamp(1.2rem, 1.4vw, 1.7rem);
+  font-size: clamp(1.65rem, 2.6vw, 2.5rem);
   line-height: 1.05;
-  font-weight: 800;
-  color: #17215e;
+  font-weight: 500;
+  color: #0f265b;
 }
 
 .aqi-location__icon {
-  width: clamp(22px, 2.2vw, 30px);
+  width: clamp(22px, 2.5vw, 32px);
   height: auto;
   flex-shrink: 0;
 }
@@ -803,119 +766,86 @@ body {
 .aqi-meta {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #ece8df;
-  color: #2c2e5c;
+  width: 100%;
+  text-align: center;
+  color: #1a2d5d;
 }
 
 .aqi-meta__calendar {
-  width: 22px;
-  height: 22px;
-  color: #6aa63b;
-  flex-shrink: 0;
-  margin-top: 2px;
+  display: none;
+}
+
+.aqi-meta__text {
+  width: 100%;
 }
 
 .aqi-meta span {
   display: block;
-  font-size: 0.82rem;
+  font-size: clamp(1.15rem, 1.9vw, 1.85rem);
+  line-height: 1.15;
+  font-weight: 400;
 }
 
 .aqi-meta strong {
   display: block;
   margin-top: 2px;
-  font-size: clamp(0.82rem, 0.88vw, 0.92rem);
-  font-weight: 500;
+  font-size: clamp(1.15rem, 1.9vw, 1.85rem);
+  line-height: 1.1;
+  font-weight: 400;
   overflow-wrap: anywhere;
 }
 
-.aqi-status-block {
+.aqi-card__history {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(10px, 1.1vw, 16px);
+  border-top: 2.5px solid #4b98e0;
+  padding-top: clamp(10px, 1.1vh, 14px);
+  margin-top: clamp(4px, 0.6vh, 8px);
+}
+
+.history-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.aqi-status-block__label {
-  font-size: clamp(0.86rem, 0.92vw, 1rem);
-  font-weight: 800;
-  color: #17215e;
-}
-
-.aqi-status-block__pill {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 135px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--status-color) 88%, white) 0%, var(--status-color) 100%);
-  color: #fff;
-  font-size: clamp(0.86rem, 0.9vw, 0.98rem);
-  font-weight: 800;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  gap: clamp(6px, 0.8vh, 10px);
 }
 
-.aqi-message {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 9px 11px;
-  border-radius: 14px;
-  border: 1.5px solid #e3e0bf;
-  background: linear-gradient(180deg, rgba(242, 244, 225, 0.95), rgba(235, 239, 215, 0.92));
-  color: #1f2758;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+.history-item__date {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  line-height: 1;
+  color: #14245a;
+  font-weight: 400;
 }
 
-.aqi-message p {
-  font-size: clamp(0.82rem, 0.86vw, 0.92rem);
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-
-.aqi-message__check {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-}
-
-.aqi-dashboard-card__gauge {
+.history-item__dot {
+  width: clamp(56px, 6.2vw, 72px);
+  height: clamp(56px, 6.2vw, 72px);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.aqi-gauge {
-  width: 100%;
-  max-width: 225px;
-  overflow: visible;
-}
-
-.aqi-gauge__tick {
-  font-size: 13px;
-  font-weight: 700;
-  fill: #25306e;
-}
-
-.aqi-gauge__label-main {
-  font-size: 16px;
-  font-weight: 800;
-  fill: #17215e;
-}
-
-.aqi-gauge__label-sub {
-  font-size: 13px;
+  background: var(--history-color, #97d84d);
+  color: #111;
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  line-height: 1;
   font-weight: 500;
-  fill: #17215e;
+}
+
+.aqi-status-block,
+.aqi-message,
+.aqi-dashboard-card__gauge {
+  display: none;
 }
 
 .aqi-hero-page__mascot-wrap {
   position: absolute;
   right: auto;
-  left: calc((100% + min(620px, 82%)) / 2 - 125px);
+  left: calc((100% + min(620px, 88%)) / 2 - 95px);
   bottom: 0;
   width: clamp(340px, 38vw, 500px);
   height: clamp(430px, 58vh, 590px);
@@ -924,6 +854,7 @@ body {
   justify-content: center;
   pointer-events: none;
   z-index: 3;
+  transform: translateX(-80px);
 }
 
 .aqi-hero-page__mascot {
@@ -939,10 +870,20 @@ body {
     padding-inline: clamp(10px, 3vw, 24px);
   }
 
+  .aqi-dashboard-card {
+    width: min(580px, 90%);
+    max-width: 580px;
+    grid-template-columns: minmax(128px, 165px) minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+    transform: translateX(-34px);
+  }
+
   .aqi-hero-page__mascot-wrap {
-    left: calc((100% + min(620px, 82%)) / 2 - 85px);
+    left: calc((100% + min(580px, 90%)) / 2 - 85px);
     width: clamp(290px, 42vw, 410px);
     height: clamp(360px, 50vh, 500px);
+    transform: translateX(-58px);
   }
 }
 
@@ -954,15 +895,17 @@ body {
 
   .aqi-dashboard-card {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .aqi-dashboard-card__summary {
-    grid-template-columns: 1fr;
+    display: flex;
   }
 
   .aqi-dashboard-card__status-panel {
     min-height: 0;
-    gap: 14px;
+    gap: 16px;
+    padding: 20px 16px;
   }
 
   .aqi-hero-page__mascot-wrap {
@@ -1016,7 +959,7 @@ body {
   }
 
   .aqi-dashboard-card {
-    padding: 12px;
+    padding: 16px;
     border-radius: 24px;
     gap: 12px;
   }
@@ -1027,24 +970,22 @@ body {
   }
 
   .aqi-location h2 {
-    font-size: clamp(1.7rem, 7vw, 2.4rem);
+    font-size: clamp(2rem, 8vw, 3rem);
   }
 
-  .aqi-status-block__pill {
-    min-width: 100%;
+  .aqi-meta span,
+  .aqi-meta strong {
+    font-size: clamp(1.35rem, 5.4vw, 2rem);
   }
 
-  .aqi-message {
-    align-items: center;
+  .history-item__date {
+    font-size: clamp(1.05rem, 4vw, 1.45rem);
   }
 
-  .aqi-message p {
-    font-size: 1rem;
-    line-height: 1.45;
-  }
-
-  .aqi-dashboard-card__gauge {
-    padding-top: 0;
+  .history-item__dot {
+    width: clamp(68px, 18vw, 92px);
+    height: clamp(68px, 18vw, 92px);
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
   }
 
   .aqi-hero-page__mascot-wrap {
