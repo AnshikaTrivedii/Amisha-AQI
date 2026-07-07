@@ -1068,13 +1068,13 @@ body {
 }
 
 .stations-signage-page__title {
-  font-size: clamp(3.15rem, 5.7vw, 8.2rem);
+  font-size: clamp(4.00rem, 7.9vw, 10.9rem);
   font-family: 'Poppins', 'Trebuchet MS', 'Segoe UI', sans-serif;
   line-height: 0.88;
   font-weight: 900;
   letter-spacing: 0.015em;
   color: #ee3324;
-  margin-top: clamp(10px, 1.2vh, 18px);
+  margin-top: clamp(0px, 0.2vh, 4px);
   -webkit-text-stroke: 2.6px #ffffff;
   paint-order: stroke fill;
   text-shadow:
@@ -1236,7 +1236,7 @@ body {
   position: relative;
   z-index: 1;
   margin-top: clamp(9px, 0.9vh, 13px);
-  font-size: clamp(3.35rem, 4.45vw, 4.5rem);
+  font-size: clamp(4.3rem, 5.7vw, 5.8rem);
   line-height: 0.9;
   font-weight: 700;
   color: #fff;
@@ -1338,7 +1338,7 @@ body {
 .stations-signage-page__mascot-wrap {
   position: absolute;
   right: max(-9vw, -90px);
-  bottom: 12px;
+  bottom: -6px;
   width: clamp(255px, 24vw, 400px);
   height: clamp(405px, 66vh, 600px);
   display: flex;
