@@ -1,4 +1,4 @@
-import { getAqiCategory } from '../utils/aqi'
+import { getAqiCategory, getAqiSummaryTheme } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
 
 function CalendarIcon() {
@@ -81,6 +81,7 @@ export default function CityAqiPage() {
   }
 
   const category = getAqiCategory(cityData.aqi)
+  const summaryTheme = getAqiSummaryTheme(cityData.aqi)
   const updatedText = formatUpdatedText(cityData.lastUpdated)
   const historyItems = buildHistory(cityData.history, cityData.aqi)
 
@@ -108,7 +109,17 @@ export default function CityAqiPage() {
           <div className="aqi-hero-page__main">
             <div className="aqi-stage">
               <article className="aqi-dashboard-card">
-                <section className="aqi-dashboard-card__status-panel" style={{ '--status-color': category.bg }}>
+                <section
+                  className="aqi-dashboard-card__status-panel"
+                  style={{
+                    '--status-gradient': summaryTheme.gradient,
+                    '--status-primary': summaryTheme.primary,
+                    '--status-secondary': summaryTheme.secondary,
+                    '--status-decorative': summaryTheme.decorative,
+                  }}
+                >
+                  <span className="status-panel__decor status-panel__decor--top" aria-hidden="true" />
+                  <span className="status-panel__decor status-panel__decor--bottom" aria-hidden="true" />
                   <p className="status-panel__heading">{category.label}</p>
                   <p className="status-panel__value">{cityData.aqi}</p>
                 </section>
