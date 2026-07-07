@@ -66,7 +66,6 @@ export function getAqiSummaryTheme(aqi) {
     primary: entry.primary,
     secondary: entry.secondary,
     gradient: buildAqiGradient(entry.primary, entry.secondary),
-    decorative: entry.secondary,
   }
 }
 

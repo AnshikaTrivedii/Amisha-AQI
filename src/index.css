@@ -707,31 +707,6 @@ body {
   transition: background 300ms ease;
 }
 
-.status-panel__decor {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0.34;
-  transition: background-color 300ms ease, opacity 300ms ease;
-}
-
-.status-panel__decor--top {
-  top: -14%;
-  right: -10%;
-  width: 44%;
-  height: 44%;
-  border-radius: 58% 42% 64% 36% / 48% 52% 44% 56%;
-  background-color: var(--status-decorative, var(--status-secondary, #66bb6a));
-}
-
-.status-panel__decor--bottom {
-  bottom: -12%;
-  left: -8%;
-  width: 38%;
-  height: 38%;
-  border-radius: 42% 58% 36% 64% / 56% 44% 52% 48%;
-  background-color: var(--status-decorative, var(--status-secondary, #66bb6a));
-}
-
 .status-panel__heading {
   position: relative;
   z-index: 1;

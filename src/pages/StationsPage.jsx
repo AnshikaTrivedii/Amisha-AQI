@@ -77,11 +77,8 @@ function StationCard({ station, lastUpdated }) {
           '--status-gradient': summaryTheme.gradient,
           '--status-primary': summaryTheme.primary,
           '--status-secondary': summaryTheme.secondary,
-          '--status-decorative': summaryTheme.decorative,
         }}
       >
-        <span className="status-panel__decor status-panel__decor--top" aria-hidden="true" />
-        <span className="status-panel__decor status-panel__decor--bottom" aria-hidden="true" />
         <p className="station-card__status-text">{category.label}</p>
         <p className="station-card__status-value">{station.aqi}</p>
       </div>

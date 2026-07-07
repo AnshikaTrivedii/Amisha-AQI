@@ -115,11 +115,8 @@ export default function CityAqiPage() {
                     '--status-gradient': summaryTheme.gradient,
                     '--status-primary': summaryTheme.primary,
                     '--status-secondary': summaryTheme.secondary,
-                    '--status-decorative': summaryTheme.decorative,
                   }}
                 >
-                  <span className="status-panel__decor status-panel__decor--top" aria-hidden="true" />
-                  <span className="status-panel__decor status-panel__decor--bottom" aria-hidden="true" />
                   <p className="status-panel__heading">{category.label}</p>
                   <p className="status-panel__value">{cityData.aqi}</p>
                 </section>
