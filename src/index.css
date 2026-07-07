@@ -833,17 +833,17 @@ body {
 }
 
 .history-item__dot {
-  width: clamp(62px, 6.8vw, 82px);
-  height: clamp(62px, 6.8vw, 82px);
+  width: clamp(78px, 8.5vw, 102px);
+  height: clamp(78px, 8.5vw, 102px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--history-color, #97d84d);
   color: #111;
-  font-size: clamp(1.9rem, 2.9vw, 2.8rem);
+  font-size: clamp(2.35rem, 3.6vw, 3.35rem);
   line-height: 1;
-  font-weight: 500;
+  font-weight: 700;
   transition: background 300ms ease;
 }
 
@@ -995,9 +995,9 @@ body {
   }
 
   .history-item__dot {
-    width: clamp(68px, 18vw, 92px);
-    height: clamp(68px, 18vw, 92px);
-    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    width: clamp(82px, 20vw, 110px);
+    height: clamp(82px, 20vw, 110px);
+    font-size: clamp(2rem, 7.2vw, 2.75rem);
   }
 
   .aqi-hero-page__mascot-wrap {
