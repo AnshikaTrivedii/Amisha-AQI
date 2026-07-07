@@ -161,9 +161,6 @@ function StationCard({ station, index }) {
         <StationIllustration kind={kind} tint={accent.strong} />
       </div>
       <h3 className="station-card__title">{station.name}</h3>
-      <p className="station-card__subtitle">
-        Lucknow - {station.agency || 'UPPCB'}
-      </p>
       <div className="station-card__divider" />
       <p className="station-card__aqi-label" style={{ color: accent.strong }}>AQI</p>
       <p className="station-card__aqi-value" style={{ color: accent.strong }}>{station.aqi}</p>
@@ -247,7 +244,6 @@ export default function StationsPage() {
                     <PinIcon />
                     <div>
                       <h2>Active Stations : {activeCount} / {totalCount}</h2>
-                      <p>(Tap on a station to see more info)</p>
                     </div>
                   </div>
                 </header>
@@ -273,7 +269,7 @@ export default function StationsPage() {
               <img
                 src="/chicken@2x.png"
                 srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
-                sizes="440px"
+                sizes="520px"
                 width="1500"
                 height="1500"
                 alt=""

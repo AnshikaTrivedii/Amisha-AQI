@@ -151,7 +151,7 @@ export default function CityAqiPage() {
                 <img
                   src="/chicken@2x.png"
                   srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
-                  sizes="(max-width: 920px) 720px, 1020px"
+                  sizes="(max-width: 920px) 410px, 500px"
                   width="1500"
                   height="1500"
                   alt=""
