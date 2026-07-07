@@ -664,8 +664,8 @@ body {
   min-height: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-right: clamp(60px, 10vw, 120px);
+  justify-content: center;
+  padding-inline: clamp(12px, 2vw, 32px);
 }
 
 .aqi-dashboard-card {
@@ -915,7 +915,7 @@ body {
 .aqi-hero-page__mascot-wrap {
   position: absolute;
   right: auto;
-  left: min(calc(620px - 125px), calc(82% - 125px));
+  left: calc((100% + min(620px, 82%)) / 2 - 125px);
   bottom: 0;
   width: clamp(340px, 38vw, 500px);
   height: clamp(430px, 58vh, 590px);
@@ -936,11 +936,11 @@ body {
 
 @media (max-width: 920px) {
   .aqi-stage {
-    padding-right: clamp(50px, 12vw, 100px);
+    padding-inline: clamp(10px, 3vw, 24px);
   }
 
   .aqi-hero-page__mascot-wrap {
-    left: min(calc(620px - 85px), calc(82% - 85px));
+    left: calc((100% + min(620px, 82%)) / 2 - 85px);
     width: clamp(290px, 42vw, 410px);
     height: clamp(360px, 50vh, 500px);
   }
