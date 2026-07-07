@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAqiCategory } from '../utils/aqi'
+import { getAqiCategory, getAqiSummaryTheme } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
 
 const PAGE_ROTATION_MS = 9000
@@ -41,33 +41,6 @@ function StationLocationIcon() {
   )
 }
 
-function getStationAccent(aqi) {
-  if (aqi <= 50) {
-    return {
-      strong: '#07982d',
-      soft: '#e6f6e7',
-      badge: '#089b2e',
-      skyline: '#d8eed9',
-    }
-  }
-
-  if (aqi <= 100) {
-    return {
-      strong: '#ffb400',
-      soft: '#fff4d8',
-      badge: '#ffb400',
-      skyline: '#f9ecd0',
-    }
-  }
-
-  return {
-    strong: '#ff5b00',
-    soft: '#ffe7d8',
-    badge: '#ff5b00',
-    skyline: '#f7dfd0',
-  }
-}
-
 function formatStationUpdated(lastUpdated) {
   if (!lastUpdated) {
     return { primary: 'Unavailable', secondary: '' }
@@ -93,19 +66,29 @@ function formatStationUpdated(lastUpdated) {
 
 function StationCard({ station, lastUpdated }) {
   const category = getAqiCategory(station.aqi)
-  const accent = getStationAccent(station.aqi)
+  const summaryTheme = getAqiSummaryTheme(station.aqi)
   const updatedText = formatStationUpdated(lastUpdated)
 
   return (
     <Link to="/" className={`station-card${station.offline ? ' station-card--offline' : ''}`}>
-      <div className="station-card__status-panel" style={{ '--station-status-color': accent.soft }}>
+      <div
+        className="station-card__status-panel"
+        style={{
+          '--status-gradient': summaryTheme.gradient,
+          '--status-primary': summaryTheme.primary,
+          '--status-secondary': summaryTheme.secondary,
+          '--status-decorative': summaryTheme.decorative,
+        }}
+      >
+        <span className="status-panel__decor status-panel__decor--top" aria-hidden="true" />
+        <span className="status-panel__decor status-panel__decor--bottom" aria-hidden="true" />
         <p className="station-card__status-text">{category.label}</p>
         <p className="station-card__status-value">{station.aqi}</p>
       </div>
 
       <div className="station-card__details">
         <div className="station-card__title-row">
-          <div className="station-card__icon" style={{ '--soft-accent': accent.soft }}>
+          <div className="station-card__icon">
             <StationLocationIcon />
           </div>
           <div className="station-card__title-wrap">

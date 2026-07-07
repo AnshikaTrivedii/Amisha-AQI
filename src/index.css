@@ -1227,12 +1227,15 @@ body {
 }
 
 .station-card__status-panel {
+  position: relative;
+  overflow: hidden;
   min-height: clamp(130px, 14.5vh, 170px);
   aspect-ratio: 1 / 1;
   width: 100%;
   max-width: 180px;
   border-radius: 14px;
-  background: #97d84d;
+  background: var(--status-gradient, linear-gradient(180deg, #66bb6a 0%, #00c853 100%));
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1240,21 +1243,28 @@ body {
   padding: clamp(9px, 0.8vw, 11px);
   text-align: center;
   justify-self: start;
+  transition: background 300ms ease;
 }
 
 .station-card__status-text {
+  position: relative;
+  z-index: 1;
   font-size: clamp(1.02rem, 1.28vw, 1.24rem);
   line-height: 1.1;
   font-weight: 700;
-  color: #111;
+  color: #fff;
+  transition: color 300ms ease;
 }
 
 .station-card__status-value {
+  position: relative;
+  z-index: 1;
   margin-top: clamp(9px, 0.9vh, 13px);
   font-size: clamp(3.35rem, 4.45vw, 4.5rem);
   line-height: 0.9;
   font-weight: 700;
-  color: #111;
+  color: #fff;
+  transition: color 300ms ease;
 }
 
 .station-card__details {
