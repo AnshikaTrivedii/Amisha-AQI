@@ -1,6 +1,9 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAqiCategory } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
+
+const PAGE_ROTATION_MS = 9000
 
 function CalendarIcon() {
   return (
@@ -148,32 +151,65 @@ function splitDateTime(lastUpdated) {
   }
 }
 
-function StationCard({ station, index }) {
+function formatStationUpdated(lastUpdated) {
+  if (!lastUpdated) {
+    return { primary: 'Unavailable', secondary: '' }
+  }
+
+  const parts = lastUpdated.trim().split(/\s+/)
+  if (parts.length >= 5) {
+    return {
+      primary: parts.slice(0, 4).join(' '),
+      secondary: parts[4],
+    }
+  }
+
+  if (parts.length === 4) {
+    return {
+      primary: parts.slice(0, 3).join(' '),
+      secondary: parts[3],
+    }
+  }
+
+  return { primary: lastUpdated, secondary: '' }
+}
+
+function StationCard({ station, index, lastUpdated }) {
   const category = getAqiCategory(station.aqi)
   const accent = getStationAccent(station.aqi)
   const kind = getStationKind(index)
-  const label = category.label.toUpperCase()
-  const textLabel = label === 'GOOD' ? 'GOOD' : label === 'SATISFACTORY' ? 'SATISFACTORY' : label
+  const updatedText = formatStationUpdated(lastUpdated)
 
   return (
     <Link to="/" className={`station-card${station.offline ? ' station-card--offline' : ''}`}>
-      <div className="station-card__icon" style={{ '--soft-accent': accent.soft }}>
-        <StationIllustration kind={kind} tint={accent.strong} />
+      <div className="station-card__status-panel" style={{ '--station-status-color': accent.soft }}>
+        <p className="station-card__status-text">{category.label}</p>
+        <p className="station-card__status-value">{station.aqi}</p>
       </div>
-      <h3 className="station-card__title">{station.name}</h3>
-      <div className="station-card__divider" />
-      <p className="station-card__aqi-label" style={{ color: accent.strong }}>AQI</p>
-      <p className="station-card__aqi-value" style={{ color: accent.strong }}>{station.aqi}</p>
-      <span className="station-card__status-pill" style={{ '--badge-color': accent.badge }}>
-        {textLabel}
-      </span>
-      <div className="station-card__skyline" style={{ '--skyline-color': accent.skyline }} aria-hidden="true" />
+
+      <div className="station-card__details">
+        <div className="station-card__title-row">
+          <div className="station-card__icon" style={{ '--soft-accent': accent.soft }}>
+            <StationIllustration kind={kind} tint="#2b83db" />
+          </div>
+          <div className="station-card__title-wrap">
+            <h3 className="station-card__title">{station.name}</h3>
+            <p className="station-card__subtitle">- {station.agency || 'UPPCB'}</p>
+          </div>
+        </div>
+
+        <div className="station-card__updated">
+          <p>Last updated: {updatedText.primary}</p>
+          {updatedText.secondary && <p>{updatedText.secondary}</p>}
+        </div>
+      </div>
+
       {station.offline && <span className="station-card__offline">Offline</span>}
     </Link>
   )
 }
 
-function StationRow({ stations, startIndex }) {
+function StationRow({ stations, startIndex, lastUpdated }) {
   return (
     <div className="stations-board__grid">
       {stations.map((station, index) => (
@@ -181,6 +217,7 @@ function StationRow({ stations, startIndex }) {
           key={`${station.name}-${station.agency}`}
           station={station}
           index={startIndex + index}
+          lastUpdated={lastUpdated}
         />
       ))}
     </div>
@@ -189,6 +226,42 @@ function StationRow({ stations, startIndex }) {
 
 export default function StationsPage() {
   const { stations, cityData, loading, error } = useAqi()
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const stationList = stations || []
+  const stationPages = useMemo(() => {
+    const signageStations = stationList.slice(0, 6)
+    const pages = []
+
+    for (let i = 0; i < signageStations.length; i += 2) {
+      pages.push(signageStations.slice(i, i + 2))
+    }
+
+    return pages
+  }, [stationList])
+
+  const visibleStations = stationPages[currentPage] || []
+  const topStation = visibleStations[0] ? [visibleStations[0]] : []
+  const bottomStation = visibleStations[1] ? [visibleStations[1]] : []
+
+  useEffect(() => {
+    if (stationPages.length <= 1) {
+      setCurrentPage(0)
+      return undefined
+    }
+
+    const intervalId = setInterval(() => {
+      setCurrentPage((page) => (page + 1) % stationPages.length)
+    }, PAGE_ROTATION_MS)
+
+    return () => clearInterval(intervalId)
+  }, [stationPages.length])
+
+  useEffect(() => {
+    if (currentPage >= stationPages.length) {
+      setCurrentPage(0)
+    }
+  }, [currentPage, stationPages.length])
 
   if (loading) {
     return <div className="page-status">Loading stations...</div>
@@ -198,8 +271,6 @@ export default function StationsPage() {
     return <div className="page-status page-status--error">{error || 'No stations available'}</div>
   }
 
-  const firstRow = stations.slice(0, 3)
-  const secondRow = stations.slice(3, 6)
   const activeCount = stations.filter((station) => !station.offline).length
   const totalCount = stations.length
   const { date, time } = splitDateTime(cityData?.lastUpdated)
@@ -239,30 +310,13 @@ export default function StationsPage() {
           <div className="stations-signage-page__stage">
             <div className="stations-signage-page__boards">
               <section className="stations-board stations-board--top">
-                <header className="stations-board__header stations-board__header--plain">
-                  <div className="stations-board__heading">
-                    <PinIcon />
-                    <div>
-                      <h2>Active Stations : {activeCount} / {totalCount}</h2>
-                    </div>
-                  </div>
-                </header>
-
-                <StationRow stations={firstRow} startIndex={0} />
+                <StationRow stations={topStation} startIndex={currentPage * 2} lastUpdated={cityData?.lastUpdated} />
               </section>
 
               <section className="stations-board stations-board--bottom">
-                <StationRow stations={secondRow} startIndex={3} />
+                <StationRow stations={bottomStation} startIndex={currentPage * 2 + 1} lastUpdated={cityData?.lastUpdated} />
               </section>
 
-              <footer className="stations-footer">
-                <span className="stations-footer__line" />
-                <div className="stations-footer__message">
-                  <LeafMark />
-                  <span>Clean Air, Better Tomorrow</span>
-                </div>
-                <span className="stations-footer__line" />
-              </footer>
             </div>
 
             <div className="stations-signage-page__mascot-wrap" aria-hidden="true">
