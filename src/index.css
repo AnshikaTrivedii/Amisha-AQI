@@ -889,7 +889,7 @@ body {
   justify-content: center;
   pointer-events: none;
   z-index: 3;
-  transform: translateX(-160px);
+  transform: translateX(-130px);
 }
 
 .aqi-hero-page__mascot {
@@ -919,7 +919,7 @@ body {
     bottom: -12px;
     width: clamp(315px, 42vw, 450px);
     height: clamp(365px, 49vh, 505px);
-    transform: translateX(-116px);
+    transform: translateX(-86px);
   }
 }
 
