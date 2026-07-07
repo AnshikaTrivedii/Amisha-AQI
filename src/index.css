@@ -710,20 +710,20 @@ body {
 .status-panel__heading {
   position: relative;
   z-index: 1;
-  font-size: clamp(1.45rem, 2.1vw, 2.3rem);
+  font-size: clamp(1.65rem, 2.4vw, 2.65rem);
   line-height: 1.05;
-  font-weight: 500;
-  color: #fff;
+  font-weight: 800;
+  color: #111;
   transition: color 300ms ease;
 }
 
 .status-panel__value {
   position: relative;
   z-index: 1;
-  font-size: clamp(4.4rem, 6.6vw, 6.5rem);
+  font-size: clamp(4.9rem, 7.2vw, 7.1rem);
   line-height: 0.9;
-  font-weight: 700;
-  color: #fff;
+  font-weight: 900;
+  color: #111;
   margin: 0;
   transition: color 300ms ease;
 }
@@ -1227,8 +1227,8 @@ body {
   z-index: 1;
   font-size: clamp(1.22rem, 1.52vw, 1.48rem);
   line-height: 1.1;
-  font-weight: 700;
-  color: #000;
+  font-weight: 800;
+  color: #111;
   transition: color 300ms ease;
 }
 
@@ -1236,10 +1236,10 @@ body {
   position: relative;
   z-index: 1;
   margin-top: clamp(9px, 0.9vh, 13px);
-  font-size: clamp(4.3rem, 5.7vw, 5.8rem);
+  font-size: clamp(4.7rem, 6.2vw, 6.3rem);
   line-height: 0.9;
-  font-weight: 700;
-  color: #000;
+  font-weight: 900;
+  color: #111;
   transition: color 300ms ease;
 }
 
