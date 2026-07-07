@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&display=swap');
+
 *,
 *::before,
 *::after {
@@ -564,11 +566,11 @@ body {
 .aqi-banner {
   position: relative;
   width: 100%;
-  min-height: clamp(78px, 12vh, 124px);
+  min-height: clamp(64px, 9vh, 96px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(8px, 1vw, 14px) clamp(18px, 2vw, 38px);
+  padding: clamp(6px, 0.7vw, 10px) clamp(18px, 2vw, 38px);
 }
 
 .aqi-banner__logo {
@@ -576,7 +578,7 @@ body {
   left: clamp(18px, 2vw, 38px);
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(82px, 9vw, 132px);
+  width: clamp(72px, 7.8vw, 118px);
   height: auto;
   display: block;
 }
@@ -586,11 +588,11 @@ body {
   min-width: 0;
   color: #2b318d;
   text-align: center;
-  padding-inline: clamp(108px, 14vw, 170px);
+  padding-inline: clamp(96px, 12vw, 150px);
 }
 
 .aqi-banner__title-hi {
-  font-size: clamp(1.55rem, 3.4vw, 3.35rem);
+  font-size: clamp(1.35rem, 3vw, 2.95rem);
   line-height: 1.02;
   font-weight: 800;
   letter-spacing: 0.01em;
@@ -598,8 +600,8 @@ body {
 }
 
 .aqi-banner__title-en {
-  margin-top: clamp(4px, 0.6vw, 8px);
-  font-size: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(3px, 0.45vw, 6px);
+  font-size: clamp(0.9rem, 1.7vw, 1.7rem);
   line-height: 1.05;
   font-weight: 800;
   letter-spacing: 0.01em;
@@ -621,7 +623,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: clamp(4px, 0.55vh, 10px);
-  padding-top: clamp(8px, 1.1vh, 16px);
+  padding-top: clamp(2px, 0.35vh, 6px);
   overflow: visible;
 }
 
@@ -629,22 +631,21 @@ body {
   width: calc(100% + (clamp(10px, 1.3vw, 18px) * 2));
   margin-left: calc(clamp(10px, 1.3vw, 18px) * -1);
   margin-right: calc(clamp(10px, 1.3vw, 18px) * -1);
-  margin-bottom: clamp(2px, 0.35vh, 6px);
+  margin-top: clamp(4px, 0.45vh, 10px);
+  margin-bottom: clamp(20px, 2.4vh, 34px);
   text-align: center;
   font-size: clamp(3.1rem, 7vw, 6rem);
-  line-height: 0.92;
+  line-height: 0.9;
+  font-family: 'Poppins', 'Trebuchet MS', 'Segoe UI', sans-serif;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   color: #d62828;
-  -webkit-text-stroke: 4px #ffffff;
+  -webkit-text-stroke: 6px #ffffff;
   paint-order: stroke fill;
   text-shadow:
-    4px 4px 0 #ffffff,
-    -4px -4px 0 #ffffff,
-    4px -4px 0 #ffffff,
-    -4px 4px 0 #ffffff,
-    0 6px 0 rgba(255, 255, 255, 0.85),
-    0 8px 18px rgba(13, 36, 100, 0.38);
+    0 0 0 #ffffff,
+    6px 8px 0 rgba(70, 70, 70, 0.74),
+    7px 11px 15px rgba(70, 70, 70, 0.24);
   flex-shrink: 0;
 }
 
@@ -685,7 +686,7 @@ body {
     0 8px 0 rgba(112, 122, 138, 0.16),
     0 14px 36px rgba(75, 85, 110, 0.1);
   overflow: hidden;
-  transform: translate(-68px, -42px);
+  transform: translate(-68px, -56px);
 }
 
 .aqi-dashboard-card__status-panel {
@@ -848,15 +849,15 @@ body {
   position: absolute;
   right: auto;
   left: calc((100% + min(720px, 92%)) / 2 - 110px);
-  bottom: -58px;
-  width: clamp(470px, 50vw, 690px);
-  height: clamp(590px, 74vh, 790px);
+  bottom: -18px;
+  width: clamp(385px, 41vw, 560px);
+  height: clamp(455px, 59vh, 615px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
   pointer-events: none;
   z-index: 3;
-  transform: translateX(-176px);
+  transform: translateX(-160px);
 }
 
 .aqi-hero-page__mascot {
@@ -878,15 +879,15 @@ body {
     grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
     gap: 16px;
     padding: 18px;
-    transform: translate(-42px, -24px);
+    transform: translate(-42px, -32px);
   }
 
   .aqi-hero-page__mascot-wrap {
     left: calc((100% + min(650px, 92%)) / 2 - 96px);
-    bottom: -38px;
-    width: clamp(390px, 54vw, 560px);
-    height: clamp(490px, 65vh, 660px);
-    transform: translateX(-128px);
+    bottom: -12px;
+    width: clamp(315px, 42vw, 450px);
+    height: clamp(365px, 49vh, 505px);
+    transform: translateX(-116px);
   }
 }
 
