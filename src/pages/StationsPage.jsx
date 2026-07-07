@@ -321,8 +321,7 @@ export default function StationsPage() {
 
             <div className="stations-signage-page__mascot-wrap" aria-hidden="true">
               <img
-                src="/chicken@2x.png"
-                srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
+                src="/final transparent sarus mascot-06 (3) (1).png"
                 sizes="520px"
                 width="1500"
                 height="1500"

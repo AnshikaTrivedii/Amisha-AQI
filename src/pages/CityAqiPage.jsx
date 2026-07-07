@@ -146,8 +146,7 @@ export default function CityAqiPage() {
 
               <div className="aqi-hero-page__mascot-wrap" aria-hidden="true">
                 <img
-                  src="/chicken@2x.png"
-                  srcSet="/chicken.png 500w, /chicken@2x.png 1500w"
+                  src="/final transparent sarus mascot-06 (3) (1).png"
                   sizes="(max-width: 920px) 410px, 500px"
                   width="1500"
                   height="1500"
