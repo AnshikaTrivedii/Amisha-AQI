@@ -53,59 +53,16 @@ function LeafMark() {
   )
 }
 
-function StationIllustration({ kind, tint }) {
-  const baseFill = tint
-
-  if (kind === 'school') {
-    return (
-      <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M16 50h32M20 50V26h24v24M26 18h12l6 8H20l6-8ZM28 32v4M36 32v4M28 40v4M36 40v4M31 22h2" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
-  if (kind === 'university') {
-    return (
-      <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="m12 24 20-8 20 8-20 8-20-8ZM20 29v10M44 29v10M16 42c5.5 2.8 10.9 4 16 4s10.5-1.2 16-4M52 26v12" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
-  if (kind === 'city') {
-    return (
-      <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M18 50V22l14-6v34M32 50V16l14 6v28M14 50h36M24 28h2M24 34h2M24 40h2M38 28h2M38 34h2M38 40h2" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
-  if (kind === 'monument') {
-    return (
-      <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M16 50h32M20 50V34h24v16M18 34h28M24 34V24l8-6 8 6v10M28 28h8" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
-  if (kind === 'factory') {
-    return (
-      <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M14 50h36V28l-10 6v-8l-10 6v-8l-16 10v16ZM22 50V38M30 50v-8M38 50v-6M42 20c0-3 2-5 5-6" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
-  }
-
+function StationLocationIcon() {
   return (
-    <svg className="station-card__icon-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-      <path d="M16 46h32M22 46l10-26 10 26M26 34h12M18 20h28" stroke={baseFill} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className="station-card__icon-art" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 21s-6.5-5.9-6.5-11A6.5 6.5 0 1 1 18.5 10c0 5.1-6.5 11-6.5 11Z"
+        fill="#2b83db"
+      />
+      <circle cx="12" cy="10" r="2.4" fill="#fff" />
     </svg>
   )
-}
-
-function getStationKind(index) {
-  const kinds = ['school', 'university', 'city', 'monument', 'factory', 'park']
-  return kinds[index % kinds.length]
 }
 
 function getStationAccent(aqi) {
@@ -174,10 +131,9 @@ function formatStationUpdated(lastUpdated) {
   return { primary: lastUpdated, secondary: '' }
 }
 
-function StationCard({ station, index, lastUpdated }) {
+function StationCard({ station, lastUpdated }) {
   const category = getAqiCategory(station.aqi)
   const accent = getStationAccent(station.aqi)
-  const kind = getStationKind(index)
   const updatedText = formatStationUpdated(lastUpdated)
 
   return (
@@ -190,11 +146,10 @@ function StationCard({ station, index, lastUpdated }) {
       <div className="station-card__details">
         <div className="station-card__title-row">
           <div className="station-card__icon" style={{ '--soft-accent': accent.soft }}>
-            <StationIllustration kind={kind} tint="#2b83db" />
+            <StationLocationIcon />
           </div>
           <div className="station-card__title-wrap">
             <h3 className="station-card__title">{station.name}</h3>
-            <p className="station-card__subtitle">- {station.agency || 'UPPCB'}</p>
           </div>
         </div>
 
@@ -216,7 +171,6 @@ function StationRow({ stations, startIndex, lastUpdated }) {
         <StationCard
           key={`${station.name}-${station.agency}`}
           station={station}
-          index={startIndex + index}
           lastUpdated={lastUpdated}
         />
       ))}

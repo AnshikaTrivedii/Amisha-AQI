@@ -1093,23 +1093,24 @@ body {
 }
 
 .stations-signage-page__title {
-  font-size: clamp(2.7rem, 5.5vw, 4.8rem);
-  line-height: 0.9;
+  font-size: clamp(3.15rem, 5.7vw, 8.2rem);
+  font-family: 'Poppins', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  line-height: 0.88;
   font-weight: 900;
-  letter-spacing: 0.05em;
-  color: #0d49b5;
+  letter-spacing: 0.015em;
+  color: #ee3324;
   margin-top: clamp(10px, 1.2vh, 18px);
-  -webkit-text-stroke: 1.6px rgba(255, 255, 255, 0.95);
+  -webkit-text-stroke: 2.6px #ffffff;
   paint-order: stroke fill;
   text-shadow:
-    0 3px 0 rgba(255, 255, 255, 0.92),
-    0 6px 14px rgba(35, 56, 110, 0.26);
+    3px 3px 0 rgba(255, 255, 255, 0.2),
+    6px 6px 0 rgba(92, 92, 92, 0.78);
   flex-shrink: 0;
 }
 
 .stations-signage-page__stage {
   position: relative;
-  width: min(790px, 86%);
+  width: min(880px, 92%);
   flex: 1;
   min-height: 0;
   padding-right: clamp(160px, 18vw, 250px);
@@ -1121,8 +1122,8 @@ body {
 }
 
 .stations-signage-page__boards {
-  width: min(100%, 750px);
-  margin: clamp(8px, 0.9vh, 12px) auto 0;
+  width: min(100%, 830px);
+  margin: clamp(18px, 1.8vh, 24px) auto 0;
   height: auto;
   max-height: 100%;
   display: grid;
@@ -1204,9 +1205,9 @@ body {
   position: relative;
   overflow: hidden;
   min-height: 0;
-  min-height: clamp(165px, 18vh, 215px);
+  min-height: clamp(182px, 19.5vh, 235px);
   height: 100%;
-  padding: clamp(10px, 0.95vw, 13px) clamp(12px, 1.05vw, 15px);
+  padding: clamp(12px, 1.1vw, 16px) clamp(14px, 1.2vw, 18px);
   border-radius: 18px;
   border: 2px solid #8dbceb;
   background: #f4f8ff;
@@ -1215,8 +1216,8 @@ body {
     0 6px 0 rgba(112, 122, 138, 0.14),
     0 10px 24px rgba(75, 85, 110, 0.08);
   display: grid;
-  grid-template-columns: minmax(120px, 165px) minmax(0, 1fr);
-  gap: clamp(10px, 1vw, 13px);
+  grid-template-columns: minmax(132px, 180px) minmax(0, 1fr);
+  gap: clamp(12px, 1.1vw, 16px);
   align-items: center;
   text-decoration: none;
   color: inherit;
@@ -1227,10 +1228,10 @@ body {
 }
 
 .station-card__status-panel {
-  min-height: clamp(118px, 13.5vh, 154px);
+  min-height: clamp(130px, 14.5vh, 170px);
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 165px;
+  max-width: 180px;
   border-radius: 14px;
   background: #97d84d;
   display: flex;
@@ -1243,17 +1244,17 @@ body {
 }
 
 .station-card__status-text {
-  font-size: clamp(0.88rem, 1.1vw, 1.08rem);
+  font-size: clamp(1.02rem, 1.28vw, 1.24rem);
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: 700;
   color: #111;
 }
 
 .station-card__status-value {
   margin-top: clamp(9px, 0.9vh, 13px);
-  font-size: clamp(1.9rem, 2.7vw, 2.7rem);
+  font-size: clamp(3.35rem, 4.45vw, 4.5rem);
   line-height: 0.9;
-  font-weight: 500;
+  font-weight: 700;
   color: #111;
 }
 
@@ -1272,8 +1273,8 @@ body {
 }
 
 .station-card__icon {
-  width: clamp(20px, 1.9vw, 24px);
-  height: clamp(20px, 1.9vw, 24px);
+  width: clamp(28px, 2.5vw, 34px);
+  height: clamp(28px, 2.5vw, 34px);
   flex-shrink: 0;
 }
 
@@ -1288,29 +1289,20 @@ body {
 
 .station-card__title {
   margin: 0;
-  font-size: clamp(0.92rem, 1.2vw, 1.18rem);
+  font-size: clamp(2.00rem, 2.00vw, 2.00rem);
   line-height: 1.12;
-  font-weight: 500;
+  font-weight: 700;
   color: #10306b;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-.station-card__subtitle {
-  margin-top: 2px;
-  font-size: clamp(0.82rem, 1.05vw, 1.08rem);
-  color: #10306b;
-  line-height: 1.12;
-  font-weight: 500;
   max-width: 100%;
   overflow-wrap: anywhere;
 }
 
 .station-card__updated {
   color: #18356c;
-  font-size: clamp(0.7rem, 0.9vw, 0.92rem);
+  font-size: clamp(0.8rem, 1vw, 1rem);
   line-height: 1.15;
   text-align: center;
+  font-weight: 700;
 }
 
 .station-card__updated p {
@@ -1360,8 +1352,8 @@ body {
 
 .stations-signage-page__mascot-wrap {
   position: absolute;
-  right: max(-3.5vw, -44px);
-  bottom: 2px;
+  right: max(-15.5vw, -150px);
+  bottom: -62px;
   width: clamp(340px, 32vw, 520px);
   height: clamp(540px, 84vh, 780px);
   display: flex;
