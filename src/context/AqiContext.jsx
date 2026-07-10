@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { DEFAULT_CITY, fetchAqiData, getAllCities } from '../utils/xmlApi'
 import { getAqiHistory, recordAqiReading, toReadingIsoDate } from '../utils/aqiHistory'
 
-const REFRESH_INTERVAL_MS = 20 * 60 * 1000
+const REFRESH_INTERVAL_MS = 60 * 60 * 1000
 
 const AqiContext = createContext(null)
 
@@ -35,18 +35,32 @@ export function AqiProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    getAllCities()
-      .then(setCityList)
-      .catch(() => {})
-  }, [])
+    let isMounted = true
 
-  useEffect(() => {
-    loadData(selectedCity, true)
+    const initializeData = async () => {
+      await loadData(selectedCity, true)
+
+      try {
+        const cities = await getAllCities()
+        if (isMounted) {
+          setCityList(cities)
+        }
+      } catch {
+        // Keep existing city list if this request fails.
+      }
+    }
+
+    initializeData()
+
     const intervalId = setInterval(
       () => loadData(selectedCity, false, true),
       REFRESH_INTERVAL_MS,
     )
-    return () => clearInterval(intervalId)
+
+    return () => {
+      isMounted = false
+      clearInterval(intervalId)
+    }
   }, [selectedCity, loadData])
 
   return (

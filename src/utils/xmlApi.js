@@ -119,12 +119,13 @@ async function fetchXmlText(forceRefresh = false) {
     return cachedXmlText
   }
 
-  const sources = [AQI_API_URL, SUPPLEMENT_URL]
+  const apiUrl = forceRefresh ? `${AQI_API_URL}?refresh=1` : AQI_API_URL
+  const sources = [apiUrl, SUPPLEMENT_URL]
   let lastError = null
 
   for (const url of sources) {
     try {
-      const isApi = url === AQI_API_URL
+      const isApi = url.startsWith(AQI_API_URL)
       const response = await fetchWithTimeout(url, {}, isApi ? 5000 : 3000)
       if (!response.ok) {
         lastError = new Error(`Failed to load AQI data (${response.status})`)

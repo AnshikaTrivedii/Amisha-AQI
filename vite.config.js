@@ -5,6 +5,7 @@ const cpcbProxy = {
   '/api/aqi': {
     target: 'https://airquality.cpcb.gov.in',
     changeOrigin: true,
+    secure: false,
     rewrite: () => '/caaqms/rss_feed',
   },
 }

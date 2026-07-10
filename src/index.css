@@ -29,6 +29,23 @@ body {
   min-height: 100vh;
 }
 
+.led-preview-shell {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.led-preview-canvas {
+  width: 288px;
+  height: 288px;
+  flex: 0 0 288px;
+  transform: scale(var(--led-preview-scale, 1));
+  transform-origin: center center;
+}
+
 /* UPPCB frame */
 
 .app-frame {
@@ -1566,6 +1583,300 @@ body {
   body {
     background: #dfe6ee;
   }
+}
+
+/* Fixed 288x288 LED canvas */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.aqi-hero-page,
+.stations-signage-page {
+  width: 288px;
+  height: 288px;
+  min-height: 288px;
+  max-height: 288px;
+}
+
+.aqi-hero-page__content,
+.stations-signage-page__content {
+  width: 288px;
+  height: 288px;
+  min-height: 288px;
+  max-height: 288px;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.aqi-hero-page__header,
+.stations-signage-page__header {
+  width: calc(100% + 8px);
+  margin-left: -4px;
+  margin-right: -4px;
+  margin-top: -4px;
+}
+
+.aqi-banner {
+  min-height: 40px;
+  padding: 4px 8px;
+}
+
+.aqi-banner__logo {
+  left: 8px;
+  width: 28px;
+}
+
+.aqi-banner__text {
+  padding-inline: 40px 8px;
+}
+
+.aqi-banner__title-hi {
+  font-size: 0.42rem;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.aqi-banner__title-en {
+  margin-top: 1px;
+  font-size: 0.32rem;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.aqi-hero-page__hero,
+.stations-signage-page__hero {
+  gap: 2px;
+  padding-top: 1px;
+}
+
+.aqi-hero-page__title {
+  width: 100%;
+  margin: 1px 0 4px;
+  font-size: 1.95rem;
+  line-height: 0.9;
+  -webkit-text-stroke: 1.25px #ffffff;
+  text-shadow:
+    0 0 0 #ffffff,
+    2px 2px 0 rgba(70, 70, 70, 0.74),
+    3px 4px 6px rgba(70, 70, 70, 0.2);
+}
+
+.aqi-hero-page__main {
+  width: 100%;
+}
+
+.aqi-stage {
+  width: 100%;
+  height: 100%;
+  padding-inline: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.aqi-dashboard-card {
+  width: 204px;
+  max-width: 204px;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 7px;
+  padding: 8px 8px 7px;
+  border-width: 1.5px;
+  border-radius: 12px;
+  transform: translate(0, 0);
+}
+
+.aqi-dashboard-card__status-panel {
+  min-height: 110px;
+  border-radius: 10px;
+  padding: 8px 6px;
+  gap: 8px;
+}
+
+.status-panel__heading {
+  font-size: 0.72rem;
+  line-height: 0.98;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.status-panel__value {
+  font-size: 2.8rem;
+  line-height: 0.88;
+}
+
+.aqi-dashboard-card__info {
+  gap: 7px;
+}
+
+.aqi-location {
+  gap: 4px;
+  margin-top: 0;
+}
+
+.aqi-location h2 {
+  font-size: 1.32rem;
+  line-height: 1;
+}
+
+.aqi-location__icon {
+  width: 14px;
+}
+
+.aqi-meta {
+  gap: 0;
+}
+
+.aqi-meta span,
+.aqi-meta strong {
+  font-size: 0.55rem;
+  line-height: 1.1;
+}
+
+.aqi-card__history {
+  gap: 4px;
+  border-top-width: 1.5px;
+  padding-top: 6px;
+  margin-top: 2px;
+}
+
+.history-item {
+  gap: 3px;
+}
+
+.history-item__date {
+  font-size: 0.48rem;
+}
+
+.history-item__dot {
+  width: 36px;
+  height: 36px;
+  font-size: 1.15rem;
+}
+
+.aqi-hero-page__mascot-wrap {
+  left: auto;
+  right: -4px;
+  bottom: 4px;
+  width: 102px;
+  height: 124px;
+  transform: none;
+}
+
+.stations-signage-page__title {
+  margin-top: 0;
+  font-size: 2rem;
+  line-height: 0.9;
+  -webkit-text-stroke: 1.2px #ffffff;
+  text-shadow:
+    2px 2px 0 rgba(255, 255, 255, 0.2),
+    3px 3px 0 rgba(92, 92, 92, 0.78);
+}
+
+.stations-signage-page__stage {
+  width: 100%;
+  padding-right: 62px;
+  padding-top: 2px;
+  align-items: flex-start;
+}
+
+.stations-signage-page__boards {
+  width: 100%;
+  margin: 4px 0 0;
+  row-gap: 8px;
+}
+
+.stations-board {
+  padding: 4px 5px;
+  border-radius: 10px;
+  border-width: 1.5px;
+  box-shadow:
+    0 3px 0 rgba(112, 122, 138, 0.18),
+    0 5px 12px rgba(75, 85, 110, 0.08);
+}
+
+.station-card {
+  min-height: 78px;
+  padding: 5px 6px;
+  border-radius: 10px;
+  border-width: 1.5px;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.station-card__status-panel {
+  min-height: 58px;
+  max-width: 58px;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.station-card__status-text {
+  font-size: 0.45rem;
+  line-height: 1;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.station-card__status-value {
+  margin-top: 4px;
+  font-size: 1.95rem;
+  line-height: 0.9;
+}
+
+.station-card__details {
+  gap: 4px;
+}
+
+.station-card__title-row {
+  gap: 4px;
+}
+
+.station-card__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.station-card__title {
+  font-size: 0.7rem;
+  line-height: 1.05;
+}
+
+.station-card__updated {
+  font-size: 0.42rem;
+  line-height: 1.08;
+}
+
+.station-card__updated p + p {
+  display: none;
+}
+
+.station-card__offline {
+  top: 4px;
+  right: 4px;
+  padding: 2px 4px;
+  font-size: 0.42rem;
+}
+
+.stations-signage-page__mascot-wrap {
+  right: -4px;
+  bottom: 4px;
+  width: 88px;
+  height: 126px;
 }
 
 .page-status {
