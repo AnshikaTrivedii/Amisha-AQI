@@ -1,7 +1,9 @@
 const DEFAULT_CITY = 'Lucknow'
 const AQI_API_URL = '/api/aqi'
 const SUPPLEMENT_URL = '/city_aqi.xml'
-const CACHE_TTL_MS = 20 * 60 * 1000
+const CACHE_TTL_MS = 60 * 60 * 1000
+const API_TIMEOUT_MS = 20000
+const SUPPLEMENT_TIMEOUT_MS = 3000
 
 let cachedXmlText = null
 let cacheTimestamp = 0
@@ -119,14 +121,20 @@ async function fetchXmlText(forceRefresh = false) {
     return cachedXmlText
   }
 
-  const apiUrl = forceRefresh ? `${AQI_API_URL}?refresh=1` : AQI_API_URL
-  const sources = [apiUrl, SUPPLEMENT_URL]
+  const apiUrl = forceRefresh
+    ? `${AQI_API_URL}?refresh=1&_=${Date.now()}`
+    : AQI_API_URL
+  const sources = forceRefresh ? [apiUrl] : [apiUrl, SUPPLEMENT_URL]
   let lastError = null
 
   for (const url of sources) {
     try {
       const isApi = url.startsWith(AQI_API_URL)
-      const response = await fetchWithTimeout(url, {}, isApi ? 5000 : 3000)
+      const response = await fetchWithTimeout(
+        url,
+        { cache: 'no-store' },
+        isApi ? API_TIMEOUT_MS : SUPPLEMENT_TIMEOUT_MS,
+      )
       if (!response.ok) {
         lastError = new Error(`Failed to load AQI data (${response.status})`)
         continue
@@ -137,6 +145,10 @@ async function fetchXmlText(forceRefresh = false) {
     } catch (err) {
       lastError = err
     }
+  }
+
+  if (cachedXmlText) {
+    return cachedXmlText
   }
 
   throw lastError || new Error('Failed to load AQI data from CPCB')
@@ -186,6 +198,10 @@ export async function getAllCities(forceRefresh = false) {
 export async function fetchAqiData(cityName = DEFAULT_CITY, forceRefresh = false) {
   const xmlText = await fetchXmlText(forceRefresh)
   const result = parseAqiXml(xmlText, cityName)
+
+  if (forceRefresh) {
+    return result
+  }
 
   const supplementXml = await fetchSupplementXml()
   if (!supplementXml) {

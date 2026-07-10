@@ -9,7 +9,7 @@ const CPCB_FEED_URL = 'https://airquality.cpcb.gov.in/caaqms/rss_feed'
 const CACHE_TTL_MS = 60 * 60 * 1000
 const PORT = Number(process.env.PORT) || 3000
 
-let cachedXml = null
+let cachedLiveXml = null
 let cacheTimestamp = 0
 
 function fetchCpcbFeed() {
@@ -54,29 +54,26 @@ async function loadFallbackXml() {
 }
 
 async function getAqiXml(forceRefresh = false) {
-  const cacheValid = cachedXml && Date.now() - cacheTimestamp < CACHE_TTL_MS
+  const cacheValid = cachedLiveXml && Date.now() - cacheTimestamp < CACHE_TTL_MS
   if (!forceRefresh && cacheValid) {
-    return cachedXml
+    return cachedLiveXml
   }
 
   try {
     const xml = await fetchCpcbFeed()
-    cachedXml = xml
+    cachedLiveXml = xml
     cacheTimestamp = Date.now()
     return xml
   } catch (error) {
-    if (cachedXml) {
-      return cachedXml
+    if (cachedLiveXml) {
+      return cachedLiveXml
     }
 
-    try {
-      const fallbackXml = await loadFallbackXml()
-      cachedXml = fallbackXml
-      cacheTimestamp = Date.now()
-      return fallbackXml
-    } catch {
+    if (forceRefresh) {
       throw error
     }
+
+    return loadFallbackXml()
   }
 }
 

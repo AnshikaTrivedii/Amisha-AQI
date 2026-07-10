@@ -36,6 +36,23 @@ export function AqiProvider({ children }) {
 
   useEffect(() => {
     let isMounted = true
+    let hourlyIntervalId = null
+    let hourlyTimeoutId = null
+
+    const refreshData = (isInitial = false, forceRefresh = false) => {
+      if (isMounted) {
+        loadData(selectedCity, isInitial, forceRefresh)
+      }
+    }
+
+    const scheduleHourlyRefresh = () => {
+      const msUntilNextHour = REFRESH_INTERVAL_MS - (Date.now() % REFRESH_INTERVAL_MS)
+
+      hourlyTimeoutId = setTimeout(() => {
+        refreshData(false, true)
+        hourlyIntervalId = setInterval(() => refreshData(false, true), REFRESH_INTERVAL_MS)
+      }, msUntilNextHour)
+    }
 
     const initializeData = async () => {
       await loadData(selectedCity, true)
@@ -50,16 +67,21 @@ export function AqiProvider({ children }) {
       }
     }
 
-    initializeData()
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        refreshData(false, true)
+      }
+    }
 
-    const intervalId = setInterval(
-      () => loadData(selectedCity, false, true),
-      REFRESH_INTERVAL_MS,
-    )
+    initializeData()
+    scheduleHourlyRefresh()
+    document.addEventListener('visibilitychange', handleVisibilityChange)
 
     return () => {
       isMounted = false
-      clearInterval(intervalId)
+      clearTimeout(hourlyTimeoutId)
+      clearInterval(hourlyIntervalId)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [selectedCity, loadData])
 
