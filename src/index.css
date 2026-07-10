@@ -1625,37 +1625,39 @@ body {
   min-height: 100%;
   max-width: none;
   max-height: none;
-  padding: 4px;
+  padding: 2px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .aqi-hero-page__header,
 .stations-signage-page__header {
-  width: calc(100% + 8px);
-  margin-left: -4px;
-  margin-right: -4px;
-  margin-top: -4px;
+  flex-shrink: 0;
+  width: calc(100% + 4px);
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-top: -2px;
 }
 
 .aqi-banner {
-  min-height: 40px;
-  padding: 4px 8px;
+  min-height: 26px;
+  padding: 2px 6px;
 }
 
 .aqi-banner__logo {
-  left: 8px;
-  width: 28px;
+  left: 6px;
+  width: 18px;
 }
 
 .aqi-banner__text {
-  padding-inline: 40px 8px;
+  padding-inline: 30px 6px;
 }
 
 .aqi-banner__title-hi {
-  font-size: 0.48rem;
-  line-height: 1.05;
+  font-size: 0.44rem;
+  line-height: 1;
   font-weight: 900;
   letter-spacing: 0;
   color: #2c2f8f;
@@ -1664,9 +1666,9 @@ body {
 }
 
 .aqi-banner__title-en {
-  margin-top: 1px;
-  font-size: 0.37rem;
-  line-height: 1.05;
+  margin-top: 0;
+  font-size: 0.34rem;
+  line-height: 1;
   font-weight: 800;
   letter-spacing: 0.04em;
   color: #2c2f8f;
@@ -1676,30 +1678,39 @@ body {
 
 .aqi-hero-page__hero,
 .stations-signage-page__hero {
-  gap: 2px;
-  padding-top: 1px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-top: 0;
+  overflow: hidden;
 }
 
 .aqi-hero-page__title {
+  flex-shrink: 0;
   width: 100%;
-  margin: 1px 0 4px;
-  font-size: 1.95rem;
-  line-height: 0.9;
-  -webkit-text-stroke: 1.25px #ffffff;
+  margin: 0 0 1px;
+  font-size: 1.46rem;
+  line-height: 0.85;
+  -webkit-text-stroke: 1px #ffffff;
   text-shadow:
     0 0 0 #ffffff,
-    2px 2px 0 rgba(70, 70, 70, 0.74),
-    3px 4px 6px rgba(70, 70, 70, 0.2);
+    1.5px 1.5px 0 rgba(70, 70, 70, 0.74),
+    2px 3px 4px rgba(70, 70, 70, 0.2);
 }
 
 .aqi-hero-page__main {
+  flex: 1;
+  min-height: 0;
   width: 100%;
 }
 
 .aqi-stage {
   width: 100%;
   height: 100%;
-  padding-inline: 4px;
+  padding-inline: 2px;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -1707,24 +1718,24 @@ body {
 .aqi-dashboard-card {
   width: 204px;
   max-width: 204px;
-  grid-template-columns: 76px minmax(0, 1fr);
-  gap: 7px;
-  padding: 8px 8px 7px;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 5px;
+  padding: 5px 6px 4px;
   border-width: 1.5px;
-  border-radius: 12px;
+  border-radius: 10px;
   transform: translate(0, 0);
 }
 
 .aqi-dashboard-card__status-panel {
-  min-height: 110px;
-  border-radius: 10px;
-  padding: 8px 6px;
-  gap: 8px;
+  min-height: 88px;
+  border-radius: 8px;
+  padding: 5px 4px;
+  gap: 4px;
 }
 
 .status-panel__heading {
-  font-size: 0.72rem;
-  line-height: 0.98;
+  font-size: 0.66rem;
+  line-height: 0.95;
   width: 100%;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -1732,26 +1743,26 @@ body {
 }
 
 .status-panel__value {
-  font-size: 2.8rem;
-  line-height: 0.88;
+  font-size: 2.45rem;
+  line-height: 0.85;
 }
 
 .aqi-dashboard-card__info {
-  gap: 7px;
+  gap: 4px;
 }
 
 .aqi-location {
-  gap: 4px;
+  gap: 3px;
   margin-top: 0;
 }
 
 .aqi-location h2 {
-  font-size: 1.32rem;
+  font-size: 1.18rem;
   line-height: 1;
 }
 
 .aqi-location__icon {
-  width: 14px;
+  width: 12px;
 }
 
 .aqi-meta {
@@ -1760,91 +1771,95 @@ body {
 
 .aqi-meta span,
 .aqi-meta strong {
-  font-size: 0.55rem;
-  line-height: 1.1;
+  font-size: 0.5rem;
+  line-height: 1.05;
 }
 
 .aqi-card__history {
-  gap: 4px;
+  gap: 3px;
   border-top-width: 1.5px;
-  padding-top: 6px;
-  margin-top: 2px;
+  padding-top: 4px;
+  margin-top: 1px;
 }
 
 .history-item {
-  gap: 3px;
+  gap: 2px;
 }
 
 .history-item__date {
-  font-size: 0.48rem;
+  font-size: 0.44rem;
 }
 
 .history-item__dot {
-  width: 36px;
-  height: 36px;
-  font-size: 1.15rem;
+  width: 32px;
+  height: 32px;
+  font-size: 1.05rem;
 }
 
 .aqi-hero-page__mascot-wrap {
   left: auto;
-  right: -26px;
-  bottom: 4px;
-  width: 126px;
-  height: 158px;
+  right: -22px;
+  bottom: 2px;
+  width: 113px;
+  height: 142px;
   transform: none;
 }
 
 .stations-signage-page__title {
+  flex-shrink: 0;
   margin-top: 0;
-  font-size: 2rem;
-  line-height: 0.9;
-  -webkit-text-stroke: 1.2px #ffffff;
+  margin-bottom: 1px;
+  font-size: 1.5rem;
+  line-height: 0.85;
+  -webkit-text-stroke: 1px #ffffff;
   text-shadow:
-    2px 2px 0 rgba(255, 255, 255, 0.2),
-    3px 3px 0 rgba(92, 92, 92, 0.78);
+    1.5px 1.5px 0 rgba(255, 255, 255, 0.2),
+    2px 2px 0 rgba(92, 92, 92, 0.78);
 }
 
 .stations-signage-page__stage {
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  padding-right: 62px;
-  padding-top: 2px;
+  padding-right: 56px;
+  padding-top: 0;
   align-items: flex-start;
 }
 
 .stations-signage-page__boards {
   width: 100%;
-  margin: 4px 0 0;
-  row-gap: 8px;
+  margin: 1px 0 0;
+  row-gap: 5px;
 }
 
 .stations-board {
-  padding: 4px 5px;
-  border-radius: 10px;
+  padding: 3px 4px;
+  border-radius: 8px;
   border-width: 1.5px;
   box-shadow:
-    0 3px 0 rgba(112, 122, 138, 0.18),
-    0 5px 12px rgba(75, 85, 110, 0.08);
+    0 2px 0 rgba(112, 122, 138, 0.18),
+    0 4px 10px rgba(75, 85, 110, 0.08);
 }
 
 .station-card {
-  min-height: 78px;
-  padding: 5px 6px;
-  border-radius: 10px;
+  min-height: 62px;
+  padding: 4px 5px;
+  border-radius: 8px;
   border-width: 1.5px;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 6px;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 5px;
 }
 
 .station-card__status-panel {
-  min-height: 58px;
-  max-width: 58px;
-  border-radius: 8px;
-  padding: 4px;
+  min-height: 46px;
+  max-width: 52px;
+  border-radius: 7px;
+  padding: 3px;
 }
 
 .station-card__status-text {
-  font-size: 0.45rem;
-  line-height: 1;
+  font-size: 0.42rem;
+  line-height: 0.95;
   width: 100%;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -1852,32 +1867,32 @@ body {
 }
 
 .station-card__status-value {
-  margin-top: 4px;
-  font-size: 1.95rem;
-  line-height: 0.9;
+  margin-top: 2px;
+  font-size: 1.75rem;
+  line-height: 0.88;
 }
 
 .station-card__details {
-  gap: 4px;
+  gap: 3px;
 }
 
 .station-card__title-row {
-  gap: 4px;
+  gap: 3px;
 }
 
 .station-card__icon {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
 }
 
 .station-card__title {
-  font-size: 0.7rem;
-  line-height: 1.05;
+  font-size: 0.64rem;
+  line-height: 1;
 }
 
 .station-card__updated {
-  font-size: 0.42rem;
-  line-height: 1.08;
+  font-size: 0.38rem;
+  line-height: 1.05;
 }
 
 .station-card__updated p + p {
@@ -1885,17 +1900,17 @@ body {
 }
 
 .station-card__offline {
-  top: 4px;
-  right: 4px;
-  padding: 2px 4px;
-  font-size: 0.42rem;
+  top: 3px;
+  right: 3px;
+  padding: 1px 3px;
+  font-size: 0.38rem;
 }
 
 .stations-signage-page__mascot-wrap {
-  right: -26px;
-  bottom: 4px;
-  width: 110px;
-  height: 162px;
+  right: -22px;
+  bottom: 2px;
+  width: 99px;
+  height: 146px;
 }
 
 .page-status {
