@@ -1820,7 +1820,7 @@ body {
   bottom: 0;
   width: 88px;
   height: 108px;
-  margin: 0 0 0 -2px;
+  margin: 0 0 0 -10px;
   flex-shrink: 0;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1961,7 +1961,7 @@ body {
   bottom: 0;
   width: 82px;
   height: 100px;
-  margin: 0 0 0 -2px;
+  margin: 0 0 0 -10px;
   flex-shrink: 0;
   align-items: flex-end;
   justify-content: flex-start;
