@@ -3,7 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/leaf.svg" />
-    <meta name="viewport" content="width=288, height=288, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=288, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <script>
+      (function () {
+        var size = 288
+        var w = window.screen.width || window.innerWidth || size
+        var h = window.screen.height || window.innerHeight || size
+        var scale = Math.max(w / size, h / size)
+        var meta = document.querySelector('meta[name="viewport"]')
+        if (meta) {
+          meta.setAttribute(
+            'content',
+            'width=' +
+              size +
+              ', height=' +
+              size +
+              ', initial-scale=' +
+              scale +
+              ', minimum-scale=' +
+              scale +
+              ', maximum-scale=' +
+              scale +
+              ', user-scalable=no, viewport-fit=cover',
+          )
+        }
+      })()
+    </script>
     <title>AQI Monitor - Lucknow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

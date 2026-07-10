@@ -6,10 +6,12 @@ import StationsPage from './pages/StationsPage'
 export default function App() {
   return (
     <AqiProvider>
-      <Routes>
-        <Route path="/" element={<CityAqiPage />} />
-        <Route path="/stations" element={<StationsPage />} />
-      </Routes>
+      <div className="signage-app">
+        <Routes>
+          <Route path="/" element={<CityAqiPage />} />
+          <Route path="/stations" element={<StationsPage />} />
+        </Routes>
+      </div>
     </AqiProvider>
   )
 }
