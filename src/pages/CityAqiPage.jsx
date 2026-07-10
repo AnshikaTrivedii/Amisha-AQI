@@ -1,3 +1,4 @@
+import SignageBackground from '../components/SignageBackground'
 import { getAqiCategory, getAqiSummaryTheme } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
 
@@ -87,6 +88,7 @@ export default function CityAqiPage() {
 
   return (
     <main className="aqi-hero-page">
+      <SignageBackground className="aqi-hero-page__background" />
       <div className="aqi-hero-page__backdrop" />
       <div className="aqi-hero-page__content">
         <header className="aqi-hero-page__header">

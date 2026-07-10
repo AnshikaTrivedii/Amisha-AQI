@@ -543,15 +543,27 @@ body {
   height: 100vh;
   min-height: 100vh;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 240, 213, 0.34)),
-    url('/background.png') center bottom / cover no-repeat;
+}
+
+.aqi-hero-page__background,
+.stations-signage-page__background {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .aqi-hero-page__backdrop {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 240, 213, 0.34)),
     radial-gradient(circle at 73% 58%, rgba(255, 244, 200, 0.54), transparent 25%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 238, 209, 0.2));
   pointer-events: none;
@@ -559,7 +571,7 @@ body {
 
 .aqi-hero-page__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: 100vh;
   min-height: 100vh;
   padding: clamp(10px, 1.3vw, 18px);
@@ -609,20 +621,28 @@ body {
 }
 
 .aqi-banner__title-hi {
-  font-size: clamp(1.35rem, 3vw, 2.95rem);
+  font-size: clamp(1.5rem, 3.45vw, 3.375rem);
   line-height: 1.02;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.01em;
+  color: #2c2f8f;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.18);
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
 }
 
 .aqi-banner__title-en {
   margin-top: clamp(3px, 0.45vw, 6px);
-  font-size: clamp(0.9rem, 1.7vw, 1.7rem);
+  font-size: clamp(1rem, 1.95vw, 1.9rem);
   line-height: 1.05;
   font-weight: 800;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.06em;
+  color: #2c2f8f;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
 }
 
 .aqi-hero-page__banner {
@@ -970,11 +990,11 @@ body {
   }
 
   .aqi-banner__title-hi {
-    font-size: clamp(0.95rem, 4.8vw, 1.35rem);
+    font-size: clamp(1.05rem, 5.3vw, 1.5rem);
   }
 
   .aqi-banner__title-en {
-    font-size: clamp(0.68rem, 3vw, 0.95rem);
+    font-size: clamp(0.75rem, 3.3vw, 1.05rem);
     margin-top: 3px;
   }
 
@@ -1029,15 +1049,14 @@ body {
   height: 100vh;
   min-height: 100vh;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 240, 213, 0.34)),
-    url('/background.png') center bottom / cover no-repeat;
 }
 
 .stations-signage-page__backdrop {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 240, 213, 0.34)),
     radial-gradient(circle at 78% 52%, rgba(255, 248, 196, 0.5), transparent 24%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 238, 209, 0.16));
   pointer-events: none;
@@ -1045,7 +1064,7 @@ body {
 
 .stations-signage-page__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: 100vh;
   min-height: 100vh;
   padding: clamp(8px, 1vw, 14px);
@@ -1643,16 +1662,24 @@ body {
 }
 
 .aqi-banner__title-hi {
-  font-size: 0.42rem;
+  font-size: 0.48rem;
   line-height: 1.05;
+  font-weight: 900;
   letter-spacing: 0;
+  color: #2c2f8f;
+  -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.45);
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.18);
 }
 
 .aqi-banner__title-en {
   margin-top: 1px;
-  font-size: 0.32rem;
+  font-size: 0.37rem;
   line-height: 1.05;
-  letter-spacing: 0;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #2c2f8f;
+  -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.45);
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.15);
 }
 
 .aqi-hero-page__hero,
@@ -1768,10 +1795,10 @@ body {
 
 .aqi-hero-page__mascot-wrap {
   left: auto;
-  right: -4px;
+  right: -26px;
   bottom: 4px;
-  width: 102px;
-  height: 124px;
+  width: 126px;
+  height: 158px;
   transform: none;
 }
 
@@ -1873,10 +1900,10 @@ body {
 }
 
 .stations-signage-page__mascot-wrap {
-  right: -4px;
+  right: -26px;
   bottom: 4px;
-  width: 88px;
-  height: 126px;
+  width: 110px;
+  height: 162px;
 }
 
 .page-status {

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import SignageBackground from '../components/SignageBackground'
 import { getAqiCategory, getAqiSummaryTheme } from '../utils/aqi'
 import { useAqi } from '../context/AqiContext'
 
@@ -170,6 +171,7 @@ export default function StationsPage() {
 
   return (
     <main className="stations-signage-page">
+      <SignageBackground className="stations-signage-page__background" />
       <div className="stations-signage-page__backdrop" />
       <div className="stations-signage-page__content">
         <header className="stations-signage-page__header">
