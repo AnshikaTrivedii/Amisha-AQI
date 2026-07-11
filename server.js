@@ -11,6 +11,9 @@ const PORT = Number(process.env.PORT) || 3000
 
 let cachedLiveXml = null
 let cacheTimestamp = 0
+let lastLiveFetchAt = 0
+let lastLiveError = null
+let lastServedSource = 'none'
 
 function fetchCpcbFeed() {
   return new Promise((resolve, reject) => {
@@ -63,9 +66,15 @@ async function getAqiXml(forceRefresh = false) {
     const xml = await fetchCpcbFeed()
     cachedLiveXml = xml
     cacheTimestamp = Date.now()
+    lastLiveFetchAt = Date.now()
+    lastLiveError = null
+    lastServedSource = 'live'
     return xml
   } catch (error) {
+    lastLiveError = error.message
+
     if (cachedLiveXml) {
+      lastServedSource = 'cache'
       return cachedLiveXml
     }
 
@@ -73,6 +82,7 @@ async function getAqiXml(forceRefresh = false) {
       throw error
     }
 
+    lastServedSource = 'fallback'
     return loadFallbackXml()
   }
 }
@@ -93,6 +103,19 @@ app.get('/api/aqi', async (req, res) => {
   } catch (error) {
     res.status(502).send(`CPCB feed unavailable: ${error.message}`)
   }
+})
+
+app.get('/api/health', (_req, res) => {
+  res.set('Cache-Control', 'no-store')
+  res.json({
+    status: 'ok',
+    cpcbUrl: CPCB_FEED_URL,
+    lastServedSource,
+    lastLiveFetchAt: lastLiveFetchAt ? new Date(lastLiveFetchAt).toISOString() : null,
+    liveDataReachable: Boolean(cachedLiveXml),
+    lastLiveError,
+    serverTime: new Date().toISOString(),
+  })
 })
 
 app.use(express.static(distPath))

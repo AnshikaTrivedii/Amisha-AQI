@@ -1,0 +1,17 @@
+[Unit]
+Description=UPPCB AQI signage server
+After=network.target
+
+[Service]
+Type=simple
+# Adjust User and WorkingDirectory to match your EC2 setup.
+User=ubuntu
+WorkingDirectory=/home/ubuntu/AQI
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
