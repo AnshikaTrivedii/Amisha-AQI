@@ -8,6 +8,18 @@ and the app silently falls back to the stale bundled `public/city_aqi.xml`.
 
 ---
 
+## Decommission Render (if you used it before)
+
+The repo no longer supports Render. Delete the old service so the signage player
+is not pointed at a stale URL:
+
+1. Go to [dashboard.render.com](https://dashboard.render.com)
+2. Open the **amisha-aqi** web service
+3. **Settings → Delete Web Service**
+4. Point your signage player at the EC2 URL instead (see below)
+
+---
+
 ## 1. Launch the EC2 instance
 
 1. AWS Console → **EC2** → set region (top right) to **Asia Pacific (Mumbai) ap-south-1**.
