@@ -1,13 +1,12 @@
 const DEFAULT_CITY = 'Lucknow'
 const AQI_API_URL = '/api/aqi'
-const SUPPLEMENT_URL = '/city_aqi.xml'
 const CACHE_TTL_MS = 60 * 60 * 1000
-const API_TIMEOUT_MS = 20000
-const SUPPLEMENT_TIMEOUT_MS = 3000
+const API_TIMEOUT_MS = 30000
 
 let cachedXmlText = null
 let cacheTimestamp = 0
-let cachedSupplementXml = null
+let cachedFeedTimestamp = null
+let cachedBackendResponseAt = null
 
 function formatLastUpdated(dateStr) {
   if (!dateStr) return ''
@@ -39,8 +38,19 @@ function getLatestUpdate(stations) {
     }, '')
 }
 
-function stationKey(name, agency) {
-  return `${name} - ${agency}`.toLowerCase()
+function extractLatestFeedTimestamp(xmlText) {
+  const matches = [...xmlText.matchAll(/lastupdate="([^"]+)"/g)]
+  if (!matches.length) return null
+
+  return matches.reduce((latest, match) => {
+    const timestamp = match[1]
+    if (!latest) return timestamp
+    return parseApiDate(timestamp) > parseApiDate(latest) ? timestamp : latest
+  }, null)
+}
+
+function logAqiDataFlow(event) {
+  console.log('[AQI DATA]', JSON.stringify(event))
 }
 
 function parseStationElement(el, index) {
@@ -62,18 +72,6 @@ function parseStationElement(el, index) {
     predominantParameter: aqiEl?.getAttribute('Predominant_Parameter') || '',
     offline: false,
   }
-}
-
-function mergeStations(liveStations, supplementStations) {
-  const liveKeys = new Set(liveStations.map((s) => stationKey(s.name, s.agency)))
-  const missing = supplementStations
-    .filter((s) => !liveKeys.has(stationKey(s.name, s.agency)))
-    .map((s) => ({ ...s, offline: true }))
-
-  return [...liveStations, ...missing].map((station, index) => ({
-    ...station,
-    id: index + 1,
-  }))
 }
 
 function buildCityData(cityName, stations) {
@@ -109,6 +107,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 5000) {
     return await fetch(url, {
       ...options,
       signal: controller.signal,
+      cache: 'no-store',
     })
   } finally {
     clearTimeout(id)
@@ -116,42 +115,76 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 5000) {
 }
 
 async function fetchXmlText(forceRefresh = false) {
-  const cacheValid = cachedXmlText && Date.now() - cacheTimestamp < CACHE_TTL_MS
+  const now = Date.now()
+  const cacheValid = cachedXmlText && now - cacheTimestamp < CACHE_TTL_MS
+
   if (!forceRefresh && cacheValid) {
+    logAqiDataFlow({
+      stage: 'client-cache-hit',
+      feedTimestamp: cachedFeedTimestamp,
+      backendResponseAt: cachedBackendResponseAt,
+      frontendReceivedAt: new Date(now).toISOString(),
+      forceRefresh,
+    })
     return cachedXmlText
   }
 
   const apiUrl = forceRefresh
-    ? `${AQI_API_URL}?refresh=1&_=${Date.now()}`
+    ? `${AQI_API_URL}?refresh=1&_=${now}`
     : AQI_API_URL
-  const sources = forceRefresh ? [apiUrl] : [apiUrl, SUPPLEMENT_URL]
-  let lastError = null
 
-  for (const url of sources) {
-    try {
-      const isApi = url.startsWith(AQI_API_URL)
-      const response = await fetchWithTimeout(
-        url,
-        { cache: 'no-store' },
-        isApi ? API_TIMEOUT_MS : SUPPLEMENT_TIMEOUT_MS,
-      )
-      if (!response.ok) {
-        lastError = new Error(`Failed to load AQI data (${response.status})`)
-        continue
-      }
-      cachedXmlText = await response.text()
-      cacheTimestamp = Date.now()
-      return cachedXmlText
-    } catch (err) {
-      lastError = err
+  try {
+    const response = await fetchWithTimeout(apiUrl, {}, API_TIMEOUT_MS)
+    if (!response.ok) {
+      throw new Error(`Failed to load AQI data (${response.status})`)
     }
-  }
 
-  if (cachedXmlText) {
-    return cachedXmlText
-  }
+    const xmlText = await response.text()
+    const frontendReceivedAt = new Date().toISOString()
+    const backendFeedTimestamp = response.headers.get('X-Feed-Timestamp') || null
+    const backendResponseAt = response.headers.get('X-Response-At') || null
+    const backendSource = response.headers.get('X-Data-Source') || null
+    const parsedFeedTimestamp = extractLatestFeedTimestamp(xmlText)
 
-  throw lastError || new Error('Failed to load AQI data from CPCB')
+    cachedXmlText = xmlText
+    cacheTimestamp = Date.now()
+    cachedFeedTimestamp = backendFeedTimestamp || parsedFeedTimestamp
+    cachedBackendResponseAt = backendResponseAt
+
+    logAqiDataFlow({
+      stage: 'api-response',
+      source: backendSource,
+      feedTimestamp: cachedFeedTimestamp,
+      parsedFeedTimestamp,
+      backendResponseAt,
+      frontendReceivedAt,
+      forceRefresh,
+    })
+
+    return xmlText
+  } catch (err) {
+    if (!forceRefresh && cacheValid && cachedXmlText) {
+      logAqiDataFlow({
+        stage: 'client-cache-fallback-on-error',
+        feedTimestamp: cachedFeedTimestamp,
+        backendResponseAt: cachedBackendResponseAt,
+        frontendReceivedAt: new Date().toISOString(),
+        forceRefresh,
+        error: err.message,
+      })
+      return cachedXmlText
+    }
+
+    logAqiDataFlow({
+      stage: 'fetch-error',
+      feedTimestamp: cachedFeedTimestamp,
+      backendResponseAt: cachedBackendResponseAt,
+      frontendReceivedAt: new Date().toISOString(),
+      forceRefresh,
+      error: err.message,
+    })
+    throw err
+  }
 }
 
 export function parseAqiXml(xmlText, cityName = DEFAULT_CITY) {
@@ -168,23 +201,6 @@ export function parseAqiXml(xmlText, cityName = DEFAULT_CITY) {
   return { cityData, stations }
 }
 
-async function fetchSupplementXml() {
-  if (cachedSupplementXml) {
-    return cachedSupplementXml
-  }
-
-  try {
-    const response = await fetchWithTimeout(SUPPLEMENT_URL, {}, 3000)
-    if (response.ok) {
-      cachedSupplementXml = await response.text()
-    }
-  } catch {
-    // Supplement feed is optional.
-  }
-
-  return cachedSupplementXml
-}
-
 export async function getAllCities(forceRefresh = false) {
   const xmlText = await fetchXmlText(forceRefresh)
   const doc = new DOMParser().parseFromString(xmlText, 'text/xml')
@@ -199,25 +215,18 @@ export async function fetchAqiData(cityName = DEFAULT_CITY, forceRefresh = false
   const xmlText = await fetchXmlText(forceRefresh)
   const result = parseAqiXml(xmlText, cityName)
 
-  if (forceRefresh) {
-    return result
-  }
+  logAqiDataFlow({
+    stage: 'parsed-city-data',
+    city: cityName,
+    feedTimestamp: cachedFeedTimestamp,
+    displayedTimestamp: result.cityData.lastUpdatedRaw,
+    displayedAqi: result.cityData.aqi,
+    backendResponseAt: cachedBackendResponseAt,
+    frontendReceivedAt: new Date().toISOString(),
+    forceRefresh,
+  })
 
-  const supplementXml = await fetchSupplementXml()
-  if (!supplementXml) {
-    return result
-  }
-
-  try {
-    const supplement = parseAqiXml(supplementXml, cityName)
-    const stations = mergeStations(result.stations, supplement.stations)
-    return {
-      cityData: buildCityData(cityName, stations),
-      stations,
-    }
-  } catch {
-    return result
-  }
+  return result
 }
 
 export { DEFAULT_CITY }

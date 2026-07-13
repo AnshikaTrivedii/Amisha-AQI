@@ -23,7 +23,23 @@ export function AqiProvider({ children }) {
       result.cityData.history = getAqiHistory(result.cityData.name)
       setData(result)
       setError(null)
+
+      console.log('[AQI REFRESH]', JSON.stringify({
+        city: cityName,
+        forceRefresh,
+        isInitial,
+        displayedTimestamp: result.cityData.lastUpdatedRaw,
+        displayedAqi: result.cityData.aqi,
+        frontendUpdatedAt: new Date().toISOString(),
+      }))
     } catch (err) {
+      console.error('[AQI REFRESH]', JSON.stringify({
+        city: cityName,
+        forceRefresh,
+        isInitial,
+        error: err.message,
+        frontendUpdatedAt: new Date().toISOString(),
+      }))
       if (isInitial) setError(err.message)
     } finally {
       if (isInitial) setLoading(false)
@@ -55,10 +71,10 @@ export function AqiProvider({ children }) {
     }
 
     const initializeData = async () => {
-      await loadData(selectedCity, true)
+      await loadData(selectedCity, true, true)
 
       try {
-        const cities = await getAllCities()
+        const cities = await getAllCities(true)
         if (isMounted) {
           setCityList(cities)
         }
