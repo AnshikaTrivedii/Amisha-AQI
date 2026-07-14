@@ -6,20 +6,28 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/svg+xml" href="/leaf.svg" />
-    <meta name="viewport" content="width=288, height=240, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=288, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <script>
       (function () {
-        var width = 288
-        var height = 240
+        var size = 288
+        var w = window.screen.width || window.innerWidth || size
+        var h = window.screen.height || window.innerHeight || size
+        var scale = Math.max(w / size, h / size)
         var meta = document.querySelector('meta[name="viewport"]')
         if (meta) {
           meta.setAttribute(
             'content',
             'width=' +
-              width +
+              size +
               ', height=' +
-              height +
-              ', initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
+              size +
+              ', initial-scale=' +
+              scale +
+              ', minimum-scale=' +
+              scale +
+              ', maximum-scale=' +
+              scale +
+              ', user-scalable=no, viewport-fit=cover',
           )
         }
       })()
