@@ -1626,7 +1626,7 @@ body {
   min-height: 240px;
   max-width: 288px;
   max-height: 240px;
-  padding: 6px;
+  padding: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1685,16 +1685,16 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 0;
-  padding-top: 0;
+  gap: 1px;
+  padding-top: 1px;
   overflow: hidden;
 }
 
 .aqi-hero-page__title {
   flex-shrink: 0;
   width: 100%;
-  margin: 0 0 0;
-  font-size: 1.24rem;
+  margin: 0;
+  font-size: 1.4rem;
   line-height: 0.85;
   -webkit-text-stroke: 1px #ffffff;
   text-shadow:
@@ -1712,41 +1712,45 @@ body {
 
 .aqi-stage {
   display: grid;
-  grid-template-columns: 178px minmax(0, 1fr);
+  grid-template-columns: 198px minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
   width: 100%;
   height: 100%;
   padding-inline: 0;
-  column-gap: 6px;
+  column-gap: 4px;
   align-items: stretch;
   overflow: hidden;
   position: relative;
 }
 
 .aqi-dashboard-card {
-  width: 178px;
-  max-width: 178px;
+  width: 198px;
+  max-width: 198px;
+  height: 100%;
+  max-height: 100%;
   grid-column: 1;
   grid-row: 1;
-  align-self: start;
+  align-self: stretch;
   justify-self: start;
-  grid-template-columns: 60px minmax(0, 1fr);
-  gap: 4px;
-  padding: 4px 5px 3px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 6px;
+  padding: 7px 8px 6px;
   border-width: 1.5px;
   border-radius: 10px;
   transform: translate(0, 0);
 }
 
 .aqi-dashboard-card__status-panel {
-  min-height: 74px;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
   border-radius: 8px;
-  padding: 4px 3px;
-  gap: 3px;
+  padding: 6px 4px;
+  gap: 6px;
 }
 
 .status-panel__heading {
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   line-height: 0.95;
   width: 100%;
   max-width: 100%;
@@ -1755,26 +1759,38 @@ body {
 }
 
 .status-panel__value {
-  font-size: 2.15rem;
+  font-size: 2.55rem;
   line-height: 0.85;
 }
 
+.aqi-dashboard-card__details,
+.aqi-dashboard-card__summary {
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .aqi-dashboard-card__info {
-  gap: 3px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .aqi-location {
-  gap: 2px;
+  gap: 3px;
   margin-top: 0;
 }
 
 .aqi-location h2 {
-  font-size: 1.05rem;
+  font-size: 1.22rem;
   line-height: 1;
 }
 
 .aqi-location__icon {
-  width: 11px;
+  width: 13px;
 }
 
 .aqi-meta {
@@ -1783,29 +1799,29 @@ body {
 
 .aqi-meta span,
 .aqi-meta strong {
-  font-size: 0.44rem;
+  font-size: 0.52rem;
   line-height: 1.05;
 }
 
 .aqi-card__history {
-  gap: 2px;
+  margin-top: auto;
+  gap: 4px;
   border-top-width: 1.5px;
-  padding-top: 3px;
-  margin-top: 0;
+  padding-top: 5px;
 }
 
 .history-item {
-  gap: 1px;
+  gap: 2px;
 }
 
 .history-item__date {
-  font-size: 0.4rem;
+  font-size: 0.48rem;
 }
 
 .history-item__dot {
-  width: 28px;
-  height: 28px;
-  font-size: 0.95rem;
+  width: 34px;
+  height: 34px;
+  font-size: 1.1rem;
 }
 
 .aqi-hero-page__mascot-wrap {
@@ -1816,16 +1832,16 @@ body {
   grid-column: 2;
   grid-row: 1;
   align-self: end;
-  justify-self: start;
+  justify-self: end;
   left: auto;
   right: auto;
   bottom: 0;
-  width: 76px;
-  height: 94px;
-  margin: 0 0 -2px -10px;
+  width: 84px;
+  height: 112px;
+  margin: 0 0 0 -6px;
   flex-shrink: 0;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: flex-end;
   pointer-events: none;
   z-index: 3;
   transform: none;
@@ -1835,7 +1851,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: bottom left;
+  object-position: bottom right;
   display: block;
   visibility: visible;
   opacity: 1;
@@ -1846,7 +1862,7 @@ body {
   align-self: center;
   margin-top: 0;
   margin-bottom: 2px;
-  font-size: 1.12rem;
+  font-size: 1.28rem;
   line-height: 0.9;
   position: relative;
   z-index: 2;
@@ -1860,29 +1876,34 @@ body {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 68px;
+  grid-template-columns: minmax(0, 1fr) 78px;
   grid-template-rows: minmax(0, 1fr);
   width: 100%;
   padding: 0;
-  column-gap: 6px;
-  align-items: end;
+  column-gap: 4px;
+  align-items: stretch;
   overflow: hidden;
 }
 
 .stations-signage-page__boards {
   grid-column: 1;
   grid-row: 1;
-  align-self: start;
+  align-self: stretch;
   justify-self: stretch;
   width: 100%;
+  height: 100%;
   margin: 0;
-  row-gap: 3px;
+  row-gap: 5px;
   max-height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .stations-board {
-  padding: 2px 3px;
+  flex: 1;
+  min-height: 0;
+  padding: 3px 4px;
   border-radius: 8px;
   border-width: 1.5px;
   box-shadow:
@@ -1891,25 +1912,27 @@ body {
 }
 
 .station-card {
-  min-height: 46px;
-  max-height: 46px;
-  padding: 2px 3px;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+  padding: 4px 5px;
   border-radius: 8px;
   border-width: 1.5px;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 3px;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 5px;
 }
 
 .station-card__status-panel {
-  min-height: 36px;
-  max-height: 42px;
-  max-width: 42px;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+  max-width: 52px;
   border-radius: 7px;
-  padding: 2px;
+  padding: 3px;
 }
 
 .station-card__status-text {
-  font-size: 0.36rem;
+  font-size: 0.42rem;
   line-height: 0.95;
   width: 100%;
   max-width: 100%;
@@ -1919,30 +1942,30 @@ body {
 
 .station-card__status-value {
   margin-top: 1px;
-  font-size: 1.25rem;
+  font-size: 1.48rem;
   line-height: 0.85;
 }
 
 .station-card__details {
-  gap: 2px;
+  gap: 3px;
 }
 
 .station-card__title-row {
-  gap: 2px;
+  gap: 3px;
 }
 
 .station-card__icon {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 .station-card__title {
-  font-size: 0.5rem;
+  font-size: 0.58rem;
   line-height: 1;
 }
 
 .station-card__updated {
-  font-size: 0.34rem;
+  font-size: 0.4rem;
   line-height: 1.02;
 }
 
@@ -1951,10 +1974,10 @@ body {
 }
 
 .station-card__offline {
-  top: 2px;
-  right: 2px;
+  top: 3px;
+  right: 3px;
   padding: 1px 3px;
-  font-size: 0.34rem;
+  font-size: 0.38rem;
 }
 
 .stations-signage-page__mascot-wrap {
@@ -1965,15 +1988,15 @@ body {
   grid-column: 2;
   grid-row: 1;
   align-self: end;
-  justify-self: start;
+  justify-self: end;
   right: auto;
   bottom: 0;
-  width: 68px;
-  height: 80px;
-  margin: 0 0 -2px -10px;
+  width: 78px;
+  height: 100px;
+  margin: 0;
   flex-shrink: 0;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: flex-end;
   pointer-events: none;
   z-index: 3;
   transform: none;
@@ -1983,7 +2006,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: bottom left;
+  object-position: bottom right;
   display: block;
   visibility: visible;
   opacity: 1;
