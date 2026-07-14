@@ -9,17 +9,27 @@
     <meta name="viewport" content="width=288, height=240, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <script>
       (function () {
-        var width = 288
-        var height = 240
+        var W = 288
+        var H = 240
+        // Measure host BEFORE locking the layout viewport to 288×240.
+        var hostW = window.screen.width || window.outerWidth || window.innerWidth || W
+        var hostH = window.screen.height || window.outerHeight || window.innerHeight || H
+        var scale = Math.min(hostW / W, hostH / H)
         var meta = document.querySelector('meta[name="viewport"]')
         if (meta) {
           meta.setAttribute(
             'content',
             'width=' +
-              width +
+              W +
               ', height=' +
-              height +
-              ', initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
+              H +
+              ', initial-scale=' +
+              scale +
+              ', minimum-scale=' +
+              scale +
+              ', maximum-scale=' +
+              scale +
+              ', user-scalable=no, viewport-fit=cover',
           )
         }
       })()
