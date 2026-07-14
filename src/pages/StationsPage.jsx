@@ -174,20 +174,6 @@ export default function StationsPage() {
       <SignageBackground className="stations-signage-page__background" />
       <div className="stations-signage-page__backdrop" />
       <div className="stations-signage-page__content">
-        <header className="stations-signage-page__header">
-          <div className="aqi-banner">
-            <img
-              src="/logo.png"
-              alt="Uttar Pradesh Pollution Control Board logo"
-              className="aqi-banner__logo"
-            />
-            <div className="aqi-banner__text">
-              <p className="aqi-banner__title-hi">उत्तर प्रदेश प्रदूषण नियंत्रण बोर्ड</p>
-              <p className="aqi-banner__title-en">UTTAR PRADESH POLLUTION CONTROL BOARD</p>
-            </div>
-          </div>
-        </header>
-
         <section className="stations-signage-page__hero" aria-label="Stations dashboard">
           <h1 className="stations-signage-page__title">AQI</h1>
 

@@ -1,5 +1,4 @@
-export const SIGNAGE_WIDTH = 288
-export const SIGNAGE_HEIGHT = 240
+export const SIGNAGE_SIZE = 288
 
 // Capture host size once, before viewport meta shrinks layout dimensions.
 const initialHost = {
@@ -7,16 +6,16 @@ const initialHost = {
     window.screen?.width ||
     window.outerWidth ||
     window.innerWidth ||
-    SIGNAGE_WIDTH,
+    SIGNAGE_SIZE,
   height:
     window.screen?.height ||
     window.outerHeight ||
     window.innerHeight ||
-    SIGNAGE_HEIGHT,
+    SIGNAGE_SIZE,
 }
 
 /**
- * Map the fixed 288×240 design canvas onto the host WebView via viewport meta.
+ * Map the fixed 288×288 design canvas onto the host WebView via viewport meta.
  * Does not use CSS transform: scale().
  */
 export function applySignageViewport() {
@@ -31,7 +30,7 @@ export function applySignageViewport() {
     window.outerHeight || 0,
   )
 
-  const scale = Math.min(hostWidth / SIGNAGE_WIDTH, hostHeight / SIGNAGE_HEIGHT)
+  const scale = Math.max(hostWidth / SIGNAGE_SIZE, hostHeight / SIGNAGE_SIZE)
 
   let meta = document.querySelector('meta[name="viewport"]')
   if (!meta) {
@@ -42,6 +41,6 @@ export function applySignageViewport() {
 
   meta.setAttribute(
     'content',
-    `width=${SIGNAGE_WIDTH}, height=${SIGNAGE_HEIGHT}, initial-scale=${scale}, minimum-scale=${scale}, maximum-scale=${scale}, user-scalable=no, viewport-fit=cover`,
+    `width=${SIGNAGE_SIZE}, height=${SIGNAGE_SIZE}, initial-scale=${scale}, minimum-scale=${scale}, maximum-scale=${scale}, user-scalable=no, viewport-fit=cover`,
   )
 }
