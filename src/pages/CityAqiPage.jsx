@@ -91,20 +91,6 @@ export default function CityAqiPage() {
       <SignageBackground className="aqi-hero-page__background" />
       <div className="aqi-hero-page__backdrop" />
       <div className="aqi-hero-page__content">
-        <header className="aqi-hero-page__header">
-          <div className="aqi-banner">
-            <img
-              src="/logo.png"
-              alt="Uttar Pradesh Pollution Control Board logo"
-              className="aqi-banner__logo"
-            />
-            <div className="aqi-banner__text">
-              <p className="aqi-banner__title-hi">उत्तर प्रदेश प्रदूषण नियंत्रण बोर्ड</p>
-              <p className="aqi-banner__title-en">UTTAR PRADESH POLLUTION CONTROL BOARD</p>
-            </div>
-          </div>
-        </header>
-
         <section className="aqi-hero-page__hero" aria-label="AQI dashboard">
           <h1 className="aqi-hero-page__title">AQI</h1>
 
