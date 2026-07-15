@@ -1634,6 +1634,10 @@ body {
   gap: 0;
 }
 
+.aqi-hero-page__content {
+  padding-bottom: 6px;
+}
+
 .aqi-hero-page__header,
 .stations-signage-page__header {
   flex-shrink: 0;
@@ -1829,7 +1833,7 @@ body {
   justify-content: flex-start;
   pointer-events: none;
   z-index: 3;
-  transform: none;
+  transform: translateY(4px);
   overflow: visible;
 }
 
