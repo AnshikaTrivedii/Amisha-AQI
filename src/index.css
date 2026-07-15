@@ -1635,7 +1635,7 @@ body {
 }
 
 .aqi-hero-page__content {
-  padding-bottom: 8px;
+  padding-bottom: 14px;
 }
 
 .aqi-hero-page__header,
@@ -1693,6 +1693,10 @@ body {
   gap: 0;
   padding-top: 0;
   overflow: hidden;
+}
+
+.aqi-hero-page__hero {
+  overflow: visible;
 }
 
 .aqi-hero-page__title {
@@ -1826,14 +1830,14 @@ body {
   right: auto;
   bottom: 0;
   width: 78px;
-  height: 96px;
+  height: 92px;
   margin: 0 0 0 -10px;
   flex-shrink: 0;
   align-items: flex-end;
   justify-content: flex-end;
   pointer-events: none;
   z-index: 3;
-  transform: translateY(8px);
+  transform: translateY(6px);
   overflow: visible;
 }
 
