@@ -14,6 +14,11 @@ function localIsoDate(date = new Date()) {
   return `${year}-${month}-${day}`
 }
 
+function parseIsoLocal(isoDate) {
+  const [year, month, day] = isoDate.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
 /** Convert CPCB date "04-07-2026 11:00:00" to "2026-07-04". */
 export function toReadingIsoDate(dateStr) {
   if (!dateStr) return localIsoDate()
@@ -31,15 +36,33 @@ export function recordAqiReading(cityName, aqi, readingDate) {
   localStorage.setItem(key, JSON.stringify(stored))
 }
 
+/**
+ * Returns the last `limit` calendar days ending at the latest stored reading
+ * (or today). Missing days are included as placeholders instead of
+ * duplicating neighboring days.
+ */
 export function getAqiHistory(cityName, limit = 3) {
   const key = storageKey(cityName)
   const stored = JSON.parse(localStorage.getItem(key) || '{}')
+  const dates = Object.keys(stored).sort((a, b) => a.localeCompare(b))
 
-  return Object.entries(stored)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .slice(-limit)
-    .map(([isoDate, aqi]) => ({
-      date: formatHistoryDate(isoDate),
-      aqi,
-    }))
+  const endDate = dates.length
+    ? parseIsoLocal(dates[dates.length - 1])
+    : new Date()
+
+  const items = []
+  for (let offset = limit - 1; offset >= 0; offset -= 1) {
+    const day = new Date(endDate)
+    day.setDate(endDate.getDate() - offset)
+    const iso = localIsoDate(day)
+    const hasReading = Object.prototype.hasOwnProperty.call(stored, iso)
+
+    items.push({
+      date: formatHistoryDate(iso),
+      aqi: hasReading ? stored[iso] : '--',
+      missing: !hasReading,
+    })
+  }
+
+  return items
 }

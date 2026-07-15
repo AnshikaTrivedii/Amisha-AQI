@@ -52,22 +52,16 @@ function formatUpdatedText(lastUpdated) {
   return { primary: lastUpdated, secondary: '' }
 }
 
-function buildHistory(history = [], currentAqi) {
-  const items = history.slice(-3)
-
-  if (items.length === 0) {
+function buildHistory(history = []) {
+  if (!history.length) {
     return [
-      { date: '--/--', aqi: currentAqi },
-      { date: '--/--', aqi: currentAqi },
-      { date: '--/--', aqi: currentAqi },
+      { date: '--/--', aqi: '--', missing: true },
+      { date: '--/--', aqi: '--', missing: true },
+      { date: '--/--', aqi: '--', missing: true },
     ]
   }
 
-  while (items.length < 3) {
-    items.unshift(items[0])
-  }
-
-  return items
+  return history.slice(-3)
 }
 
 export default function CityAqiPage() {
@@ -84,7 +78,7 @@ export default function CityAqiPage() {
   const category = getAqiCategory(cityData.aqi)
   const summaryTheme = getAqiSummaryTheme(cityData.aqi)
   const updatedText = formatUpdatedText(cityData.lastUpdated)
-  const historyItems = buildHistory(cityData.history, cityData.aqi)
+  const historyItems = buildHistory(cityData.history)
 
   return (
     <main className="aqi-hero-page">
@@ -127,7 +121,9 @@ export default function CityAqiPage() {
 
                       <div className="aqi-card__history">
                         {historyItems.map((item, index) => {
-                          const historyTheme = getAqiSummaryTheme(Number(item.aqi))
+                          const historyTheme = item.missing
+                            ? { gradient: 'linear-gradient(180deg, #cfd8dc 0%, #b0bec5 100%)' }
+                            : getAqiSummaryTheme(Number(item.aqi))
 
                           return (
                             <div className="history-item" key={`${item.date}-${item.aqi}-${index}`}>
