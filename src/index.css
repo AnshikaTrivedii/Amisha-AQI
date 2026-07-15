@@ -1833,7 +1833,7 @@ body {
   justify-content: flex-end;
   pointer-events: none;
   z-index: 3;
-  transform: translateY(2px);
+  transform: translateY(8px);
   overflow: visible;
 }
 
@@ -1987,7 +1987,7 @@ body {
   justify-content: flex-end;
   pointer-events: none;
   z-index: 3;
-  transform: none;
+  transform: translateY(6px);
   overflow: visible;
 }
 
